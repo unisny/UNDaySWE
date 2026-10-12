@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Live Data APIs · UN Day</title>
+  <meta name="description" content="Free, no-key APIs with real-world data for student projects: climate, earthquakes, wildlife, food, countries, cities, books, art and space. Try each one live.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="sdg-bar" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./">From Idea to App <small>UN Day</small></a>
+      <nav class="nav" aria-label="Main">
+        <a href="./">Ideas</a>
+        <a href="start.html">5-min setup</a>
+        <a href="apis.html" aria-current="page">Live data</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow">Real-world data · no keys · no signup</span>
+        <h1>Live data,<br><span class="mark">zero</span> setup.</h1>
+        <p class="lede">Every API here returns real data the moment you ask: no account, no API key, no credit card. Each one was tested from a web page on October 12, 2026. Press <b>Try it live</b> to see what it sends back right now.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="filters" id="filters">
+          <label class="visually-hidden" for="search">Search APIs</label>
+          <input class="search" id="search" type="search" placeholder="Search: ocean, food, NYC, space…">
+        </div>
+        <p class="result-note" id="result-note" aria-live="polite"></p>
+        <div class="api-grid" id="api-grid">
+          <noscript><p>Turn on JavaScript to see the API list and try each one live.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="first-fetch">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Your first fetch</span>
+          <h2>Ten lines, live data.</h2>
+          <p>Paste this into your browser console (<kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>J</kbd> on a Mac, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>J</kbd> on Windows or a Chromebook) and press Enter. Or paste it into your AI and ask it to turn it into a real app.</p>
+        </div>
+        <div class="grid grid-2">
+          <div>
+            <h3>JavaScript</h3>
+            <div class="codeblock"><pre id="snippet-js">// Live earthquakes from the last 24 hours. No key needed.
+fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
+  .then((response) => response.json())
+  .then((data) => {
+    const quakes = data.features;
+    console.log("Earthquakes in the last 24 hours: " + quakes.length);
+    const biggest = quakes.reduce((a, b) => (b.properties.mag > a.properties.mag ? b : a));
+    console.log("Biggest: M" + biggest.properties.mag + ", " + biggest.properties.place);
+  });</pre><button type="button" class="copy" data-copy="#snippet-js">Copy</button></div>
+          </div>
+          <div>
+            <h3>Python</h3>
+            <div class="codeblock"><pre id="snippet-py"># Same data in Python. Run: pip install requests
+import requests
+
+url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+quakes = requests.get(url).json()["features"]
+print("Earthquakes in the last 24 hours:", len(quakes))
+
+biggest = max(quakes, key=lambda q: q["properties"]["mag"] or 0)
+print("Biggest: M", biggest["properties"]["mag"], biggest["properties"]["place"])</pre><button type="button" class="copy" data-copy="#snippet-py">Copy</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="swapped">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Lesson from testing</span>
+          <h2>APIs break. Always have a backup.</h2>
+          <p>Some popular “free API” lists are out of date. These didn’t make the cut when we tested them, and here’s what to use instead.</p>
+        </div>
+        <ul class="swapped">
+          <li><b>Bored API:</b> the original site shut down, and the copy that’s still online blocks web pages (no CORS). Try <a href="#api-trivia">Open Trivia DB</a> or <a href="#api-meals">TheMealDB</a> for something to do.</li>
+          <li><b>Free Dictionary API:</b> was down when we tested. Use <a href="#api-wiktionary">Wiktionary</a> or <a href="#api-datamuse">Datamuse</a>.</li>
+          <li><b>Universities API</b> and <b>ip-api:</b> only work over plain <code>http://</code>, which browsers block on https websites. For location, use the browser’s own <code>navigator.geolocation</code> (it asks permission first) or let people type a city into <a href="#api-geocode">Open-Meteo Geocoding</a>.</li>
+          <li><b>REST Countries:</b> old versions were shut down and the new one needs a key. Use <a href="#api-worldbank">World Bank</a> for country data, and <code>https://flagcdn.com/w320/ke.png</code> for flags (swap <code>ke</code> for any two-letter country code).</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>Made for the UN Day software workshop at UNIS. Data belongs to each API’s provider; check their terms before you build something big.</span>
+      <span><a href="./">Ideas</a> · <a href="start.html">5-min setup</a> · <a href="https://github.com/unisny/UNDaySWE">Source on GitHub</a></span>
+    </div>
+  </footer>
+
+  <script src="assets/site.js"></script>
+  <script src="assets/apis.js"></script>
+</body>
+</html>
