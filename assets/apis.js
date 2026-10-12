@@ -534,7 +534,7 @@
     {
       id: 'pokeapi', name: 'PokéAPI', cat: 'fun', sdg: [],
       what: 'Every Pokémon, with types, stats, moves and artwork.',
-      idea: 'Warm-up: practise fetching and showing data before your real project.',
+      idea: 'Warm-up: practice fetching and showing data before your real project.',
       url: 'https://pokeapi.co/api/v2/pokemon/pikachu',
       docs: 'https://pokeapi.co/docs/v2',
       render: (d) => ({

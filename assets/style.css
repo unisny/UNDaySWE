@@ -98,6 +98,7 @@ kbd { border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 
 .nav a { color: var(--ink-2); text-decoration: none; padding: 6px 12px; border-radius: 999px; font-weight: 600; font-size: .95rem; }
 .nav a:hover { background: var(--code-bg); }
 .nav a[aria-current="page"] { background: var(--ink); color: var(--paper); }
+@media (max-width: 600px) { .nav { gap: 2px; } .nav a { padding: 6px 9px; font-size: .88rem; } }
 
 /* ---------- Sections ---------- */
 
@@ -357,3 +358,28 @@ details[open] > summary::before { content: "–"; }
 .site-footer a { color: inherit; }
 
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Design kit (cards reuse the .api resource-card styles) ---------- */
+
+.kit-group + .kit-group { margin-top: 48px; }
+.kit-group h2 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); margin-bottom: 18px; }
+.demo iframe { display: block; width: 100%; height: var(--h, 260px); border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.demo details { margin-top: 10px; }
+.demo details summary { font-size: .88rem; }
+
+.palette { display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); }
+.swatch { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--ink); font: inherit; font-size: .88rem; line-height: 1.3; text-align: left; cursor: pointer; }
+.swatch:hover { border-color: var(--ink); }
+.swatch .chip { width: 28px; height: 28px; border-radius: 6px; background: var(--c); }
+.swatch code { font-size: .76rem; }
+
+.flow.glow { grid-template-columns: 1fr; }
+.flow.glow li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 2px 14px; align-items: start; }
+.flow.glow li::before { grid-row: span 2; margin: 0; }
+.flow.glow li b, .flow.glow li span { grid-column: 2; }
+.flow.glow li .copy { grid-column: 3; grid-row: 1 / span 2; align-self: center; }
+@media (max-width: 600px) {
+  .flow.glow li { grid-template-columns: auto minmax(0, 1fr); }
+  .flow.glow li::before { grid-row: span 3; }
+  .flow.glow li .copy { grid-column: 2; grid-row: auto; justify-self: start; margin-top: 8px; }
+}

@@ -127,7 +127,7 @@
     const ready = missing === 0;
     out.gate.classList.toggle('ready', ready);
     out.gate.textContent = ready
-      ? 'Pitch ready. Practise saying it out loud in under a minute, then copy your prompt.'
+      ? 'Pitch ready. Practice saying it out loud in under a minute, then copy your prompt.'
       : `Fill in ${missing} more blank${missing > 1 ? 's' : ''} before you prompt the AI.`;
     out.wrap.hidden = !ready;
 

@@ -7,6 +7,7 @@ Student website for the UNIS UN Day software workshop: *Turn your idea into a wo
 | `index.html` · **Ideas** | Workshop framing, four starter questions with ready-to-paste prompts, the annoyance scale, a 3-sentence pitch builder that writes the first AI prompt, the "AI is your intern" rules, how projects are judged, and 2026 industry stats |
 | `start.html` · **5-min setup** | Three lanes from computer to code: Gemini Canvas (no new accounts), GitHub Pages (put it online), Codespaces + Copilot (pro setup). Also an age-checked tool table and troubleshooting |
 | `apis.html` · **Live data** | 33 free APIs that need no key and work from a web page, each with a live **Try it** preview, a build idea and a starter prompt. Filter by topic or SDG |
+| `design.html` · **Design kit** | 26 free front-end resources: animation (GSAP, Anime.js, Motion, Animate.css, AOS, confetti, LottieFiles), components (shadcn/ui, Basecoat, Magic UI, Tailwind, daisyUI, Pico, Uiverse), fonts and icons (Google Fonts, Fontshare, Lucide, Phosphor), charts and maps (Chart.js, Leaflet, D3), and images and color tools. Each card has the line to paste, a sentence to tell the AI, and a live demo whose code students can copy. Also the SDG color palette and "glow-up" prompts |
 
 ## Run it locally
 
@@ -21,9 +22,10 @@ Then open http://localhost:8000.
 ## Edit it
 
 - **Add or change an API:** edit the `APIS` list in `assets/apis.js`. Each entry needs `id`, `name`, `cat`, `sdg`, `what`, `idea`, `url`, `docs`, and a `render(data)` function that returns `{ facts, list, images }` for the live preview. Check that the endpoint sends CORS headers, for example: `curl -sI -H 'Origin: https://example.com' URL | grep -i access-control`.
+- **Add or change a design resource:** edit the `KIT` list in `assets/design.js`. Pin CDN links to an exact version. A `demo` (`style`, `body`, `script`, optional `include` and `height`) becomes a complete page that runs in a sandboxed iframe and is shown as copyable code.
 - **Change the starter questions:** the cards are in `index.html`. Their prompts are in `SPARKS` in `assets/home.js`.
 - **Change the prompt template every page uses:** `starterPrompt()` in `assets/site.js`.
-- **Colours and layout:** `assets/style.css`. It uses the official SDG colours, light and dark mode, and works at phone width.
+- **Colors and layout:** `assets/style.css`. It uses the official SDG colors, light and dark mode, and works at phone width.
 
 ## Before the workshop (instructor checklist)
 
