@@ -33,10 +33,57 @@
         <span class="eyebrow">Real-world data · no keys · no signup</span>
         <h1>Live data,<br><span class="mark">zero</span> setup.</h1>
         <p class="lede">Every API here returns real data the moment you ask: no account, no API key, no credit card. Each one was tested from a web page on October 12, 2026. Press <b>Try it live</b> to see what it sends back right now.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#un-sdg">Start with the UN’s own data ↓</a>
+          <a class="btn btn-ghost" href="#catalog">Browse all 33 APIs</a>
+        </div>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="un-sdg">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Start here · straight from the UN</span>
+          <h2>The UN’s official SDG data, live.</h2>
+          <p>The UN Statistics Division runs a free API with the official numbers for all 17 goals and 169 targets, for every country and region. It’s the same database the UN uses for its yearly SDG progress report. No key needed.</p>
+          <div class="hero-actions">
+            <a class="btn" href="https://unstats.un.org/sdgapi/swagger/" target="_blank" rel="noopener">Open the API docs (Swagger) ↗</a>
+          </div>
+          <p class="small muted" style="margin-top: 14px"><b>Tip:</b> Swagger is a clickable menu of everything the API can do. Open an endpoint, press <b>Try it out</b>, then <b>Execute</b> to see real data without writing any code.</p>
+        </div>
+
+        <div class="card explorer" id="sdg-explorer" style="--c: var(--sdg-7)">
+          <div>
+            <p class="small muted" style="margin: 0 0 8px">Pick a goal</p>
+            <div class="goal-tiles" id="sdg-goals" role="group" aria-label="Pick a goal"></div>
+          </div>
+          <h3 id="sdg-goal-name">Loading the goals…</h3>
+          <div class="explorer-controls">
+            <div class="field"><label for="sdg-indicator">Indicator</label><select id="sdg-indicator"></select></div>
+            <div class="field"><label for="sdg-area">Country or region</label><select id="sdg-area"><option value="1">World</option></select></div>
+          </div>
+          <p class="target" id="sdg-target"></p>
+          <div class="series-grid" id="sdg-result" aria-live="polite"></div>
+          <div class="endpoint"><code id="sdg-url"></code><button type="button" class="copy" id="sdg-copy-url">Copy URL</button></div>
+          <div class="api-actions">
+            <button type="button" class="btn btn-sm" id="sdg-prompt">Copy a starter prompt for this</button>
+            <a class="btn btn-sm btn-ghost" href="https://unstats.un.org/sdgapi/swagger/" target="_blank" rel="noopener">Swagger docs ↗</a>
+          </div>
+        </div>
+
+        <details class="callout" style="margin-top: 16px">
+          <summary>Handy endpoints to give your AI</summary>
+          <ul class="endpoint-list">
+            <li><code>https://unstats.un.org/sdgapi/v1/sdg/Goal/List?includechildren=false</code> The 17 goals</li>
+            <li><code>https://unstats.un.org/sdgapi/v1/sdg/Goal/13/Target/List?includechildren=true</code> One goal’s targets and indicators</li>
+            <li><code>https://unstats.un.org/sdgapi/v1/sdg/GeoArea/List</code> Country and region codes (World = 1, Kenya = 404, USA = 840)</li>
+            <li><code>https://unstats.un.org/sdgapi/v1/sdg/Indicator/Data?indicator=7.1.1&amp;areaCode=404&amp;pageSize=1000</code> The numbers for one indicator in one place</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="catalog">
       <div class="wrap">
         <div class="filters" id="filters">
           <label class="visually-hidden" for="search">Search APIs</label>
@@ -111,5 +158,6 @@ print("Biggest: M", biggest["properties"]["mag"], biggest["properties"]["place"]
 
   <script src="assets/site.js"></script>
   <script src="assets/apis.js"></script>
+  <script src="assets/sdg.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 // to a version checked on 2026-10-12. Each demo is a complete mini page that
 // runs in a sandboxed iframe, and students can copy it as a starting point.
 (() => {
-  const { esc, copyText, flash, SDG_NAMES } = window.UND;
+  const { esc, copyText, flash, SDG_NAMES, LIGHT_TEXT } = window.UND;
 
   const CATEGORIES = {
     motion: { label: 'Animation', sdg: 10 },
@@ -568,6 +568,20 @@
     });
   }
 
+  // Official per-goal packs on un.org. Goal 3's file has a different name.
+  function mountGoalPacks(root) {
+    root.innerHTML = SDG_NAMES.slice(1).map((name, i) => {
+      const n = i + 1;
+      const file = n === 3 ? 'Goal-3-1' : `Goal-${n}`;
+      const label = `Download the Goal ${n} pack: ${esc(name)}`;
+      return `<a class="goal-tile${LIGHT_TEXT.has(n) ? ' light-text' : ''}" style="--c: var(--sdg-${n})" `
+        + `href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2020/10/${file}.zip" `
+        + `title="${label}" aria-label="${label}">${n}</a>`;
+    }).join('');
+  }
+
+  const packs = document.getElementById('goal-packs');
+  if (packs) mountGoalPacks(packs);
   const kit = document.getElementById('kit');
   if (kit) mountKit(kit);
   const palette = document.getElementById('palette');

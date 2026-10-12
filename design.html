@@ -34,6 +34,7 @@
         <h1>Design <span class="mark">kit</span>.</h1>
         <p class="lede">Animation libraries, shadcn-style components, fonts, icons, charts and color tools. Almost all of them work by pasting one line into your HTML file. Each card has the exact sentence to tell your AI, and <b>Try it live</b> runs a working demo you can copy.</p>
         <div class="lanes-nav">
+          <a class="btn btn-sm" href="#sdg-brand">Official SDG icons</a>
           <a class="btn btn-ghost btn-sm" href="#group-motion">Animation</a>
           <a class="btn btn-ghost btn-sm" href="#group-ui">Components</a>
           <a class="btn btn-ghost btn-sm" href="#group-type">Fonts &amp; icons</a>
@@ -42,6 +43,49 @@
           <a class="btn btn-ghost btn-sm" href="#sdg-colors">SDG colors</a>
           <a class="btn btn-ghost btn-sm" href="#glow-up">Glow-up prompts</a>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="sdg-brand">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Start here · straight from the UN</span>
+          <h2>The real SDG icons, logo and color wheel.</h2>
+          <p>The UN gives out the official SDG icons, the SDG logo and color wheel, posters, and a pack for each goal with social media cards, a GIF and an infographic. Everything comes in all six UN languages, and anyone can use the icons and color wheel by following the UN’s guidelines.</p>
+          <div class="hero-actions">
+            <a class="btn" href="https://www.un.org/sustainabledevelopment/news/communications-material/" target="_blank" rel="noopener">Open the UN’s download page ↗</a>
+            <a class="btn btn-ghost" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2025/07/E-SDG-Icons-WEB.zip">17 icons for web (.zip)</a>
+            <a class="btn btn-ghost" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2025/07/E-SDG-logos-SDG-wheel_No-UN-Emblem.zip">Logo and wheel (.zip)</a>
+            <a class="btn btn-ghost" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2023/09/E_SDG_Guidelines_Sep20238.pdf" target="_blank" rel="noopener">Usage guidelines (PDF)</a>
+          </div>
+        </div>
+
+        <h3>Your goal’s pack</h3>
+        <p class="small muted">Social media cards, a GIF and an infographic for one goal. Each tile downloads a .zip from un.org.</p>
+        <div class="goal-tiles" id="goal-packs"></div>
+
+        <div class="grid grid-2" style="margin-top: 28px">
+          <div class="callout info">
+            <h3>Do</h3>
+            <ul class="rules-list">
+              <li>Use the icons and color wheel to show which goal your app is about.</li>
+              <li>Use the versions <b>without</b> the UN emblem. The emblem versions are only for UN organizations.</li>
+              <li>Link to <a href="https://www.un.org/sustainabledevelopment" target="_blank" rel="noopener">un.org/sustainabledevelopment</a> and add the UN’s disclaimer line (below) to your app.</li>
+            </ul>
+          </div>
+          <div class="callout warn">
+            <h3>Don’t</h3>
+            <ul class="rules-list">
+              <li>Make it look like the UN made, approved or sponsors your app.</li>
+              <li>Build your own logo out of the wheel or the icons.</li>
+              <li>Use them to sell something or raise money. That needs the UN’s written permission.</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 28px">Paste this at the bottom of your app if you use the icons</h3>
+        <div class="codeblock"><pre id="un-disclaimer">&lt;p&gt;The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States. &lt;a href="https://www.un.org/sustainabledevelopment"&gt;un.org/sustainabledevelopment&lt;/a&gt;&lt;/p&gt;</pre><button type="button" class="copy" data-copy="#un-disclaimer">Copy</button></div>
+        <p class="small muted" style="margin-top: 10px">Rules summarized from the UN’s <a href="https://www.un.org/sustainabledevelopment/news/communications-material/" target="_blank" rel="noopener">communications materials page</a> and FAQ, checked October 12, 2026. Read the guidelines if you’re unsure.</p>
       </div>
     </section>
 

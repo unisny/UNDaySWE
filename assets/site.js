@@ -101,5 +101,5 @@
     bar.innerHTML = Array.from({ length: 17 }, (_, i) => `<span style="background: var(--sdg-${i + 1})"></span>`).join('');
   }
 
-  window.UND = { SDG_NAMES, esc, sdgChip, starterPrompt, copyText, flash, store };
+  window.UND = { SDG_NAMES, LIGHT_TEXT, esc, sdgChip, starterPrompt, copyText, flash, store };
 })();

@@ -59,6 +59,28 @@
 
   const APIS = [
     {
+      id: 'unsdg', name: 'UN SDG API (official)', cat: 'people', sdg: [17, 7],
+      what: 'The UN’s official data for all 17 goals and 231 indicators: the numbers countries report to the UN.',
+      idea: 'Pick one SDG target and build an “Are we on track for 2030?” meter for a country.',
+      url: 'https://unstats.un.org/sdgapi/v1/sdg/Indicator/Data?indicator=7.1.1&areaCode=404&pageSize=200',
+      docs: 'https://unstats.un.org/sdgapi/swagger/',
+      note: 'Countries use UN number codes (Kenya = 404, USA = 840); list them with /v1/sdg/GeoArea/List. Indicator 7.1.1 is the share of people with electricity.',
+      render: (d) => {
+        const latest = {};
+        for (const r of d.data) {
+          const where = r.dimensions.Location;
+          if (!latest[where] || r.timePeriodStart > latest[where].timePeriodStart) latest[where] = r;
+        }
+        const label = { ALLAREA: 'Everyone', URBAN: 'In cities', RURAL: 'In the countryside' };
+        return {
+          facts: [
+            ['Indicator 7.1.1', 'Kenyans with electricity'],
+            ...Object.entries(label).filter(([k]) => latest[k]).map(([k, name]) => [`${name} (${latest[k].timePeriodStart})`, `${latest[k].value}%`]),
+          ],
+        };
+      },
+    },
+    {
       id: 'weather', name: 'Open-Meteo Weather', cat: 'climate', sdg: [13, 11],
       what: 'Current weather and a 16-day forecast for any point on Earth: temperature, rain, wind, UV and more.',
       idea: 'A "should I bike to school?" app that turns the whole forecast into one yes-or-no answer.',
@@ -269,28 +291,6 @@
       render: (d) => ({
         facts: d[1].map((r) => [`${r.country.value} (${r.date})`, `${r.value.toFixed(0)}% use the internet`]),
       }),
-    },
-    {
-      id: 'unsdg', name: 'UN SDG API', cat: 'people', sdg: [17, 7],
-      what: 'The UN’s official data for all 17 goals and 231 indicators: the numbers countries report to the UN.',
-      idea: 'Pick one SDG target and build an “Are we on track for 2030?” meter for a country.',
-      url: 'https://unstats.un.org/sdgapi/v1/sdg/Indicator/Data?indicator=7.1.1&areaCode=404&pageSize=200',
-      docs: 'https://unstats.un.org/sdgapi/swagger/',
-      note: 'Countries use UN number codes (Kenya = 404, USA = 840); list them with /v1/sdg/GeoArea/List. Indicator 7.1.1 is the share of people with electricity.',
-      render: (d) => {
-        const latest = {};
-        for (const r of d.data) {
-          const where = r.dimensions.Location;
-          if (!latest[where] || r.timePeriodStart > latest[where].timePeriodStart) latest[where] = r;
-        }
-        const label = { ALLAREA: 'Everyone', URBAN: 'In cities', RURAL: 'In the countryside' };
-        return {
-          facts: [
-            ['Indicator 7.1.1', 'Kenyans with electricity'],
-            ...Object.entries(label).filter(([k]) => latest[k]).map(([k, name]) => [`${name} (${latest[k].timePeriodStart})`, `${latest[k].value}%`]),
-          ],
-        };
-      },
     },
     {
       id: 'owid', name: 'Our World in Data', cat: 'people', sdg: [13, 3, 1],
