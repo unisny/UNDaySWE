@@ -1,5 +1,6 @@
 // Shared helpers for every page: SDG chips, copy buttons, saved checklists,
 // and the starter-prompt template. Exposed on window.UND for the other scripts.
+// Also turns on the custom cursor for mouse users.
 (() => {
   const SDG_NAMES = [
     null,
@@ -121,6 +122,67 @@
 
   // Grey placeholder bars shown while a live preview loads.
   const SKELETON = '<div class="skeleton" aria-label="Loading live data"><i></i><i></i><i></i></div>';
+
+  // A custom cursor for mouse users: a dot, plus a ring that trails behind it and
+  // cycles through the 17 SDG colors as you move. It grows over anything clickable,
+  // pops SDG confetti on click, and steps aside for text fields and embedded demos.
+  // Touch screens and "reduce motion" keep the normal cursor.
+  function mountCursor() {
+    const root = document.documentElement;
+    const dot = Object.assign(document.createElement('div'), { className: 'cursor-dot' });
+    const ring = Object.assign(document.createElement('div'), { className: 'cursor-ring' });
+    document.body.append(ring, dot);
+    root.classList.add('has-cursor', 'cursor-off');
+
+    const CLICKABLE = 'a, button, summary, label, select, input[type="checkbox"]';
+    const TEXT = 'input:not([type="checkbox"]), textarea';
+    let x = 0, y = 0, ringX = 0, ringY = 0, travelled = 0, frame = 0, over = null;
+
+    function trail() {
+      ringX += (x - ringX) * 0.22;
+      ringY += (y - ringY) * 0.22;
+      ring.style.translate = `${ringX}px ${ringY}px`; // not transform, or the CSS hover scale would scale this offset too
+      frame = Math.abs(x - ringX) + Math.abs(y - ringY) > 0.3 ? requestAnimationFrame(trail) : 0;
+    }
+
+    document.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      if (!over) [ringX, ringY] = [e.clientX, e.clientY]; // (re)entering: start the ring under the pointer
+      travelled += Math.hypot(e.clientX - x, e.clientY - y);
+      [x, y] = [e.clientX, e.clientY];
+      dot.style.translate = `${x}px ${y}px`;
+      ring.style.setProperty('--c', `var(--sdg-${(Math.floor(travelled / 160) % 17) + 1})`);
+      if (!frame) frame = requestAnimationFrame(trail);
+      if (e.target !== over) {
+        over = e.target;
+        root.classList.toggle('cursor-off', Boolean(over.closest(TEXT)));
+        root.classList.toggle('cursor-hover', Boolean(over.closest(CLICKABLE)));
+      }
+    }, { passive: true });
+
+    // Leaving the window, or moving into an embedded demo, has no new target on this page.
+    document.addEventListener('pointerout', (e) => {
+      if (e.relatedTarget) return;
+      root.classList.add('cursor-off');
+      over = null;
+    });
+
+    document.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || root.classList.contains('cursor-off')) return;
+      ring.classList.add('press');
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * 2 * Math.PI + Math.random() * 0.4;
+        const distance = 30 + Math.random() * 34;
+        const spark = Object.assign(document.createElement('i'), { className: 'cursor-spark' });
+        spark.style.cssText = `left: ${e.clientX}px; top: ${e.clientY}px; --c: var(--sdg-${((i * 3) % 17) + 1}); `
+          + `--dx: ${Math.cos(angle) * distance}px; --dy: ${Math.sin(angle) * distance}px`;
+        spark.addEventListener('animationend', () => spark.remove());
+        document.body.append(spark);
+      }
+    });
+    document.addEventListener('pointerup', () => ring.classList.remove('press'));
+  }
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reducedMotion()) mountCursor();
 
   window.UND = { SDG_NAMES, LIGHT_TEXT, SKELETON, esc, sdgChip, starterPrompt, copyText, flash, store, whenVisible, reducedMotion };
 })();

@@ -6,8 +6,7 @@
 
   const CATEGORIES = {
     motion: { label: 'Animation', sdg: 10 },
-    ui: { label: 'Components & styling', sdg: 17 },
-    icons: { label: 'Icons', sdg: 9 },
+    ui: { label: 'Components & icons', sdg: 17 },
     viz: { label: 'Charts & maps', sdg: 14 },
     art: { label: 'Art & music', sdg: 5 },
     more: { label: 'More free tools', sdg: 15 },
@@ -57,35 +56,6 @@ stack(
   const KIT = [
     // ---------- Animation ----------
     {
-      id: 'gsap', name: 'GSAP', cat: 'motion', link: 'https://gsap.com',
-      ask: 'Use GSAP from the jsDelivr CDN to animate the cards in one after another when the data loads. Keep it under one second.',
-      include: '<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>',
-      demo: {
-        style: `
-          .row { display: flex; gap: 10px; flex-wrap: wrap; }
-          .box { width: 48px; height: 48px; border-radius: 12px; }
-          button { margin-top: 20px; font: inherit; padding: 8px 14px; }`,
-        body: `
-          <div class="row">
-            <div class="box" style="background:#e5243b"></div>
-            <div class="box" style="background:#fcc30b"></div>
-            <div class="box" style="background:#4c9f38"></div>
-            <div class="box" style="background:#26bde2"></div>
-            <div class="box" style="background:#3f7e44"></div>
-            <div class="box" style="background:#19486a"></div>
-          </div>
-          <button id="again">Play again</button>`,
-        script: `
-          function play() {
-            gsap.fromTo('.box',
-              { y: 80, opacity: 0, rotation: -45, scale: 0.5 },
-              { y: 0, opacity: 1, rotation: 0, scale: 1, duration: 0.9, stagger: 0.1, ease: 'back.out(1.7)' });
-          }
-          play();
-          document.getElementById('again').onclick = play;`,
-      },
-    },
-    {
       id: 'anime', name: 'Anime.js', cat: 'motion', link: 'https://animejs.com',
       ask: 'Use Anime.js v4 from the jsDelivr CDN to make the big number count up from 0 when it appears.',
       include: '<script src="https://cdn.jsdelivr.net/npm/animejs@4.5.0/dist/bundles/anime.umd.min.js"></script>',
@@ -114,56 +84,6 @@ stack(
             scale: [0, 1],
             delay: stagger(40, { grid: [10, 4], from: 'center' }),
           });`,
-      },
-    },
-    {
-      id: 'motion', name: 'Motion', cat: 'motion', link: 'https://motion.dev',
-      ask: 'Use Motion (motion.dev) from the jsDelivr CDN to give the result card a springy pop-in when it appears.',
-      include: '<script src="https://cdn.jsdelivr.net/npm/motion@13.4.4/dist/motion.js"></script>',
-      demo: {
-        style: `
-          .card { width: 200px; padding: 18px; border-radius: 16px; background: #0a97d9; color: white; }
-          .card b { font-size: 32px; display: block; }
-          button { margin-top: 18px; font: inherit; padding: 8px 14px; }`,
-        body: `
-          <div class="card" id="card"><b>AQI 41</b>Good day for a run</div>
-          <button id="pop">Pop it in</button>`,
-        script: `
-          const { animate } = Motion;
-          function pop() {
-            animate('#card', { scale: [0.4, 1], rotate: [-12, 0] }, { type: 'spring', stiffness: 260, damping: 12 });
-          }
-          pop();
-          document.getElementById('pop').onclick = pop;`,
-      },
-    },
-    {
-      id: 'animatecss', name: 'Animate.css', cat: 'motion', link: 'https://animate.style',
-      ask: 'Add Animate.css from cdnjs and make the winner card bounce in with animate__bounceIn.',
-      include: '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">',
-      demo: {
-        style: `
-          h1 { font-size: 40px; margin: 6px 0 16px; display: inline-block; }
-          button { font: inherit; font-size: 14px; padding: 6px 10px; margin: 0 4px 6px 0; }`,
-        body: `
-          <h1 id="title">Winner!</h1>
-          <div>
-            <button data-a="bounce">bounce</button>
-            <button data-a="tada">tada</button>
-            <button data-a="rubberBand">rubberBand</button>
-            <button data-a="heartBeat">heartBeat</button>
-            <button data-a="flip">flip</button>
-            <button data-a="jackInTheBox">jackInTheBox</button>
-          </div>`,
-        script: `
-          const title = document.getElementById('title');
-          for (const button of document.querySelectorAll('button')) {
-            button.onclick = () => {
-              title.className = '';
-              void title.offsetWidth; // lets the same animation play again
-              title.className = 'animate__animated animate__' + button.dataset.a;
-            };
-          }`,
       },
     },
     {
@@ -201,68 +121,8 @@ stack(
           };`,
       },
     },
-    {
-      id: 'lottie', name: 'LottieFiles', cat: 'motion', link: 'https://lottiefiles.com/free-animations', badge: 'Free account, 13+',
-      ask: 'Show this Lottie animation while the data loads, using the dotlottie-wc web component from the jsDelivr CDN: PASTE-THE-ANIMATION-LINK',
-      include: '<script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.28/dist/dotlottie-wc.js"></script>',
-      demo: {
-        style: 'body { display: grid; place-items: center; height: 100vh; box-sizing: border-box; padding: 0; }',
-        body: `
-          <dotlottie-wc
-            src="https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.lottie"
-            style="width: 200px; height: 200px"
-            autoplay loop>
-          </dotlottie-wc>`,
-      },
-    },
-    {
-      id: 'animista', name: 'Animista', cat: 'motion', link: 'https://animista.net',
-      ask: 'Here is a CSS animation from Animista: PASTE-THE-CSS. Use it on the headline when the page loads.',
-      demo: {
-        style: `
-          h1 { font-size: 38px; margin: 24px 0; animation: slide-in-blurred-top 0.6s cubic-bezier(0.23, 1, 0.32, 1) both; }
-          @keyframes slide-in-blurred-top {
-            0% { transform: translateY(-200px) scaleY(2.5) scaleX(0.2); transform-origin: 50% 0%; filter: blur(40px); opacity: 0; }
-            100% { transform: translateY(0) scaleY(1) scaleX(1); transform-origin: 50% 50%; filter: blur(0); opacity: 1; }
-          }
-          button { font: inherit; padding: 8px 14px; }`,
-        body: `
-          <h1 id="title">Slide in, blurred</h1>
-          <button id="again">Play again</button>`,
-        script: `
-          const title = document.getElementById('title');
-          document.getElementById('again').onclick = () => {
-            title.style.animation = 'none';
-            void title.offsetWidth; // lets the same animation play again
-            title.style.animation = '';
-          };`,
-      },
-    },
 
-    // ---------- Components & styling ----------
-    {
-      id: 'basecoat', name: 'Basecoat', cat: 'ui', link: 'https://basecoatui.com',
-      ask: 'Style the page with Basecoat (the shadcn/ui look for plain HTML) from the jsDelivr CDN: use its btn, card, input and badge classes.',
-      include: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css">',
-      demo: {
-        body: `
-          <div class="card" style="max-width: 380px">
-            <header>
-              <h2>Snack Battle</h2>
-              <p>Two snacks enter. One wins.</p>
-            </header>
-            <section style="display: grid; gap: 12px">
-              <input class="input" placeholder="Barcode, e.g. 0028400090896">
-              <div><span class="badge">Nutri-Score C</span> <span class="badge" data-variant="secondary">Eco-Score B</span></div>
-            </section>
-            <footer style="display: flex; gap: 8px">
-              <button class="btn">Battle!</button>
-              <button class="btn" data-variant="outline">Reset</button>
-            </footer>
-          </div>`,
-        height: 320,
-      },
-    },
+    // ---------- Components & icons ----------
     {
       id: 'tailwind', name: 'Tailwind CSS', cat: 'ui', link: 'https://tailwindcss.com',
       ask: 'Style it with Tailwind CSS using the browser build from the jsDelivr CDN.',
@@ -276,33 +136,6 @@ stack(
             <button class="mt-4 rounded-full bg-gray-900 px-4 py-2 font-semibold text-white hover:bg-emerald-700">See them</button>
           </div>`,
         height: 280,
-      },
-    },
-    {
-      id: 'daisyui', name: 'daisyUI', cat: 'ui', link: 'https://daisyui.com',
-      ask: 'Use Tailwind plus daisyUI from the jsDelivr CDN, with the "cupcake" theme.',
-      include: `
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.3/dist/index.global.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.7.46/daisyui.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.7.46/themes.css">`,
-      demo: {
-        body: `
-          <select class="select select-sm" id="theme">
-            <option>cupcake</option><option>synthwave</option><option>retro</option>
-            <option>forest</option><option>aqua</option><option>light</option><option>dark</option>
-          </select>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <button class="btn btn-primary">Primary</button>
-            <button class="btn btn-secondary">Secondary</button>
-            <button class="btn btn-accent btn-outline">Accent</button>
-          </div>
-          <div class="mt-4 flex gap-2"><span class="badge badge-success">SDG 13</span><span class="badge badge-info">SDG 14</span></div>
-          <progress class="progress progress-primary mt-4 w-56" value="77" max="100"></progress>
-          <div class="alert alert-info mt-4 max-w-sm">77% of Kenyans have electricity.</div>`,
-        script: `
-          document.documentElement.dataset.theme = 'cupcake';
-          document.getElementById('theme').onchange = (e) => { document.documentElement.dataset.theme = e.target.value; };`,
-        height: 340,
       },
     },
     {
@@ -322,10 +155,8 @@ stack(
         height: 340,
       },
     },
-
-    // ---------- Icons ----------
     {
-      id: 'lucide', name: 'Lucide icons', cat: 'icons', link: 'https://lucide.dev',
+      id: 'lucide', name: 'Lucide icons', cat: 'ui', link: 'https://lucide.dev',
       ask: 'Add Lucide icons from the jsDelivr CDN next to each number, using <i data-lucide="..."> and lucide.createIcons().',
       include: '<script src="https://cdn.jsdelivr.net/npm/lucide@1.48.0/dist/umd/lucide.min.js"></script>',
       demo: {
@@ -340,23 +171,6 @@ stack(
             <i data-lucide="trees"></i><i data-lucide="heart-pulse"></i><i data-lucide="graduation-cap"></i>
           </div>`,
         script: 'lucide.createIcons();',
-        height: 160,
-      },
-    },
-    {
-      id: 'phosphor', name: 'Phosphor Icons', cat: 'icons', link: 'https://phosphoricons.com',
-      ask: 'Use Phosphor Icons from the jsDelivr CDN (regular and fill styles) for the icons.',
-      include: `
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">`,
-      demo: {
-        style: '.icons { display: flex; flex-wrap: wrap; gap: 14px; font-size: 38px; color: #0a97d9; }',
-        body: `
-          <div class="icons">
-            <i class="ph ph-globe-hemisphere-west"></i><i class="ph-fill ph-drop"></i><i class="ph ph-plant"></i>
-            <i class="ph-fill ph-sun"></i><i class="ph ph-wind"></i><i class="ph-fill ph-leaf"></i>
-            <i class="ph ph-bicycle"></i><i class="ph ph-recycle"></i><i class="ph-fill ph-fish"></i>
-          </div>`,
         height: 160,
       },
     },
@@ -417,39 +231,7 @@ stack(
               }
             });`,
         height: 260,
-      },
-    },
-    {
-      id: 'd3', name: 'D3.js', cat: 'viz', link: 'https://d3js.org',
-      ask: 'Use D3.js v7 from the jsDelivr CDN to draw an animated bubble chart of the data.',
-      include: '<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>',
-      demo: {
-        style: `
-          body { padding: 0; }
-          svg { display: block; width: 100%; height: 100vh; }`,
-        body: '<svg id="chart"></svg>',
-        script: `
-          fetch('${USGS}')
-            .then((response) => response.json())
-            .then((data) => {
-              const svg = d3.select('#chart');
-              const { width, height } = svg.node().getBoundingClientRect();
-              const quakes = data.features.filter((quake) => quake.properties.mag > 0);
-              const root = d3.pack().size([width, height]).padding(2)(
-                d3.hierarchy({ children: quakes }).sum((quake) => (quake.properties ? quake.properties.mag ** 2 : 0)));
-
-              const bubbles = svg.selectAll('circle')
-                .data(root.leaves())
-                .join('circle')
-                .attr('cx', (d) => d.x)
-                .attr('cy', (d) => d.y)
-                .attr('fill', (d) => d3.interpolateYlOrRd(d.data.properties.mag / 6));
-              bubbles.append('title').text((d) => 'M' + d.data.properties.mag + ', ' + d.data.properties.place);
-              bubbles.attr('r', 0)
-                .transition().duration(800).delay((d, i) => i * 4)
-                .attr('r', (d) => d.r);
-            });`,
-        height: 260,
+        sameOrigin: true, // OpenStreetMap refuses map tiles to a sandboxed page with no origin
       },
     },
 
@@ -491,25 +273,6 @@ stack(
         allow: 'accelerometer *; gyroscope *', // p5 listens for phone tilt; without this the console fills with errors
       },
     },
-    {
-      id: 'hydra', name: 'Hydra', cat: 'art', link: 'https://hydra.ojack.xyz',
-      ask: 'Use hydra-synth from the jsDelivr CDN to make a live, animated background behind my headline.',
-      include: '<script src="https://cdn.jsdelivr.net/npm/hydra-synth@1.4.0/dist/hydra-synth.js"></script>',
-      demo: {
-        style: `
-          body { padding: 0; overflow: hidden; }
-          canvas { display: block; }`,
-        body: '',
-        script: `
-          new Hydra({ detectAudio: false, width: innerWidth, height: innerHeight });
-          osc(20, 0.08, 1.4)
-            .kaleid(6)
-            .rotate(0, 0.1)
-            .modulate(noise(3), 0.15)
-            .out();`,
-        height: 240,
-      },
-    },
   ];
 
   // Tools that are websites, not libraries, so there's nothing to demo. Listed under their group.
@@ -520,13 +283,9 @@ stack(
       { name: 'ml5.js', note: 'friendly AI for p5.js', link: 'https://ml5js.org' },
     ],
     more: [
-      { name: 'shadcn/ui', note: 'React components', link: 'https://ui.shadcn.com' },
-      { name: 'Magic UI', note: 'animated React components', link: 'https://magicui.design' },
       { name: 'Uiverse', note: 'copy-paste buttons & loaders', link: 'https://uiverse.io' },
-      { name: 'unDraw', note: 'free illustrations', link: 'https://undraw.co' },
       { name: 'Unsplash', note: 'free photos', link: 'https://unsplash.com' },
       { name: 'Coolors', note: 'palette generator', link: 'https://coolors.co' },
-      { name: 'Realtime Colors', note: 'try colors on a real page', link: 'https://www.realtimecolors.com' },
     ],
   };
 
@@ -541,7 +300,6 @@ stack(
       <article class="card kit${item.demo.wide ? ' wide' : ''}" id="kit-${item.id}" style="--c: var(--sdg-${CATEGORIES[item.cat].sdg})">
         <div class="kit-top">
           <h3>${esc(item.name)}</h3>
-          ${item.badge ? `<span class="badge">${esc(item.badge)}</span>` : ''}
           <a class="copy" href="${esc(item.link)}" target="_blank" rel="noopener">Site ↗</a>
         </div>
         <div class="demo" style="--h: ${item.demo.height || 220}px"></div>
@@ -573,7 +331,7 @@ stack(
         if (item.demo.embed) {
           frame.src = item.demo.embed; // a real site: unsandboxed, so it keeps its own storage and sound
         } else {
-          frame.sandbox = 'allow-scripts';
+          if (!item.demo.sameOrigin) frame.sandbox = 'allow-scripts';
           if (item.demo.allow) frame.allow = item.demo.allow;
           frame.srcdoc = demoHtml(item);
         }
@@ -627,32 +385,34 @@ stack(
     });
   }
 
-  // ---------- SDG colors and the official goal packs ----------
+  // ---------- SDG goals: each one's color and its official pack ----------
 
-  function mountPalette(root) {
-    root.innerHTML = SDG_HEX.map((hex, i) => {
-      const code = hex.toUpperCase();
-      return `
-      <button type="button" class="swatch${LIGHT_TEXT.has(i + 1) ? ' light-text' : ''}" style="--c: ${hex}" data-hex="${code}" title="Goal ${i + 1}: ${esc(SDG_NAMES[i + 1])}. Click to copy ${code}">
-        <b>${i + 1}</b><code>${code}</code>
-      </button>`;
-    }).join('');
-    root.addEventListener('click', async (e) => {
-      const swatch = e.target.closest('[data-hex]');
-      if (swatch) flash(swatch.querySelector('code'), await copyText(swatch.dataset.hex));
+  function mountGoals(root) {
+    const pick = document.getElementById('goal-pick');
+    root.innerHTML = SDG_HEX.map((hex, i) => `
+      <button type="button" class="swatch${LIGHT_TEXT.has(i + 1) ? ' light-text' : ''}" style="--c: ${hex}" data-goal="${i + 1}" aria-pressed="false" title="Goal ${i + 1}: ${esc(SDG_NAMES[i + 1])}">
+        <b>${i + 1}</b><code>${hex.toUpperCase()}</code>
+      </button>`).join('');
+
+    function select(n) {
+      const hex = SDG_HEX[n - 1].toUpperCase();
+      const file = n === 3 ? 'Goal-3-1' : `Goal-${n}`; // Goal 3's pack has a different file name on un.org
+      for (const tile of root.children) tile.setAttribute('aria-pressed', String(tile.dataset.goal === String(n)));
+      pick.style.setProperty('--c', hex);
+      pick.innerHTML = `<b>Goal ${n} · ${esc(SDG_NAMES[n])}</b>`
+        + `<button type="button" class="copy" data-hex="${hex}">Copy ${hex}</button>`
+        + `<a class="copy" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2020/10/${file}.zip">Goal ${n} pack (.zip)</a>`;
+    }
+
+    root.addEventListener('click', (e) => {
+      const tile = e.target.closest('[data-goal]');
+      if (tile) select(Number(tile.dataset.goal));
     });
-  }
-
-  // Official per-goal packs on un.org. Goal 3's file has a different name.
-  function mountGoalPacks(root) {
-    root.innerHTML = SDG_NAMES.slice(1).map((name, i) => {
-      const n = i + 1;
-      const file = n === 3 ? 'Goal-3-1' : `Goal-${n}`;
-      const label = `Download the Goal ${n} pack: ${esc(name)}`;
-      return `<a class="goal-tile${LIGHT_TEXT.has(n) ? ' light-text' : ''}" style="--c: var(--sdg-${n})" `
-        + `href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2020/10/${file}.zip" `
-        + `title="${label}" aria-label="${label}">${n}</a>`;
-    }).join('');
+    pick.addEventListener('click', async (e) => {
+      const button = e.target.closest('[data-hex]');
+      if (button) flash(button, await copyText(button.dataset.hex));
+    });
+    select(1);
   }
 
   // ---------- Glow-up: each prompt changes one mock app ----------
@@ -661,7 +421,7 @@ stack(
     { name: 'Fonts', cls: 'g-fonts', prompt: 'Use the Google Fonts "Bricolage Grotesque" for headings and "Inter" for everything else, with a warm off-white background (#F6F3EA) and generous spacing.' },
     { name: 'Color', cls: 'g-color', prompt: 'Pick one accent color and use it everywhere it matters: the official SDG 13 green, #3F7E44.' },
     { name: 'Loading', cls: 'g-load', prompt: 'While the data loads, show grey placeholder boxes in the shape of the content instead of a blank screen.' },
-    { name: 'Motion', cls: 'g-motion', prompt: 'When the data arrives, animate the cards in one after another with GSAP from the jsDelivr CDN. Keep it under one second, and skip it for people who turned on “reduce motion”.' },
+    { name: 'Motion', cls: 'g-motion', prompt: 'When the data arrives, animate the cards in one after another with Anime.js from the jsDelivr CDN. Keep it under one second, and skip it for people who turned on “reduce motion”.' },
     { name: 'Phone', cls: 'g-phone', prompt: 'Make it look great on a phone first, then on a laptop. Buttons should be big enough to tap.' },
   ];
 
@@ -691,7 +451,7 @@ stack(
     });
   }
 
-  const mounts = { 'goal-packs': mountGoalPacks, 'font-grid': mountFonts, kit: mountKit, palette: mountPalette, 'glow-steps': mountGlow };
+  const mounts = { goals: mountGoals, 'font-grid': mountFonts, kit: mountKit, 'glow-steps': mountGlow };
   for (const [id, mount] of Object.entries(mounts)) {
     const el = document.getElementById(id);
     if (el) mount(el);

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Live Data APIs · UN Day</title>
-  <meta name="description" content="Free, no-key APIs with real-world data for student projects: climate, earthquakes, wildlife, food, countries, cities, books, art and space. Each one shows its live data.">
+  <meta name="description" content="Free, no-key APIs with real-world data for student projects: the UN’s SDG numbers, climate, earthquakes, wildlife, food, NYC, art, music and space. Each one shows its live data.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,10 +19,11 @@
     <div class="wrap">
       <a class="brand" href="./">From Idea to App <small>UN Day</small></a>
       <nav class="nav" aria-label="Main">
-        <a href="./">Ideas</a>
-        <a href="start.html">5-min setup</a>
-        <a href="apis.html" aria-current="page">Live data</a>
-        <a href="design.html">Design kit</a>
+        <a href="./" style="--c: var(--sdg-7)"><b>1</b>Ideate</a>
+        <a href="apis.html" style="--c: var(--sdg-6)" aria-current="page"><b>2</b>Data</a>
+        <a href="start.html" style="--c: var(--sdg-15)"><b>3</b>Build</a>
+        <a href="design.html" style="--c: var(--sdg-11)"><b>4</b>Design</a>
+        <a href="start.html#ship" style="--c: var(--sdg-5)"><b>5</b>Ship</a>
       </nav>
     </div>
   </header>
@@ -35,7 +36,7 @@
       </div>
     </section>
 
-    <section class="section" id="un-sdg">
+    <section class="section" id="api-unsdg">
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Start here · straight from the UN</span>
@@ -63,29 +64,20 @@
     <section class="section" id="catalog">
       <div class="wrap">
         <div class="section-head">
-          <span class="eyebrow">33 free APIs</span>
+          <span class="eyebrow">19 more free APIs</span>
           <h2>Pick your data.</h2>
         </div>
         <div class="filters" id="filters">
           <label class="visually-hidden" for="search">Search APIs</label>
-          <input class="search" id="search" type="search" placeholder="Search: ocean, food, NYC, space…">
+          <input class="search" id="search" type="search" placeholder="Search: air, food, NYC, songs…">
         </div>
         <p class="result-note" id="result-note" aria-live="polite"></p>
         <div class="api-grid" id="api-grid">
           <noscript><p>Turn on JavaScript to see the APIs and their live data.</p></noscript>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="first-fetch">
-      <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Your first fetch</span>
-          <h2>Five lines, live data.</h2>
-        </div>
-        <div class="card runner">
+        <div class="card runner" id="first-fetch">
           <div class="runner-bar">
-            <span>JavaScript</span>
+            <span>Your first fetch · JavaScript</span>
             <button type="button" class="btn btn-sm" id="run">▶ Run</button>
           </div>
           <div class="codeblock"><pre id="snippet-js">// Live earthquakes from the last 24 hours. No key needed.
@@ -97,6 +89,7 @@ const biggest = quakes.reduce((a, b) => (b.properties.mag > a.properties.mag ? b
 console.log("Biggest: M" + biggest.properties.mag + ", " + biggest.properties.place);</pre><button type="button" class="copy" data-copy="#snippet-js">Copy</button></div>
           <pre class="console" id="console" aria-live="polite"></pre>
         </div>
+        <a class="card next-step" href="start.html" style="--c: var(--sdg-15)"><b>3</b><span>Next: Build<small>Open Gemini Canvas · brief your AI</small></span></a>
       </div>
     </section>
   </main>
@@ -104,7 +97,7 @@ console.log("Biggest: M" + biggest.properties.mag + ", " + biggest.properties.pl
   <footer class="site-footer">
     <div class="wrap">
       <span>Made for UN Day at UNIS. Data belongs to each API’s provider.</span>
-      <span><a href="./">Ideas</a> · <a href="start.html">5-min setup</a> · <a href="design.html">Design kit</a> · <a href="https://github.com/unisny/UNDaySWE">Source</a></span>
+      <a href="https://github.com/unisny/UNDaySWE">Source</a>
     </div>
   </footer>
 

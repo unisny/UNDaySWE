@@ -12,12 +12,16 @@
     return true;
   }
 
-  // Show the lane before the browser follows the link, so it can scroll to it.
+  // Show the lane a link points to, then scroll to its target: hiding the other
+  // lanes moves everything below them (like #ship), so the browser's own jump misses.
+  function follow(id, behavior) {
+    showLane(id);
+    document.getElementById(id)?.scrollIntoView({ behavior });
+  }
   for (const tab of tabs) tab.addEventListener('click', () => showLane(tab.hash.slice(1)));
-  window.addEventListener('hashchange', () => showLane(location.hash.slice(1)));
-  const linked = location.hash.slice(1);
-  if (showLane(linked)) document.getElementById(linked).scrollIntoView({ behavior: 'instant' });
-  else showLane('lane-1');
+  window.addEventListener('hashchange', () => follow(location.hash.slice(1), 'auto'));
+  showLane('lane-1');
+  follow(location.hash.slice(1), 'instant');
 
   function updateProgress(lane) {
     const boxes = [...lane.querySelectorAll('input[type="checkbox"]')];

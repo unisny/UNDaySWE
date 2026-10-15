@@ -21,10 +21,11 @@
     <div class="wrap">
       <a class="brand" href="./">From Idea to App <small>UN Day</small></a>
       <nav class="nav" aria-label="Main">
-        <a href="./">Ideas</a>
-        <a href="start.html">5-min setup</a>
-        <a href="apis.html">Live data</a>
-        <a href="design.html" aria-current="page">Design kit</a>
+        <a href="./" style="--c: var(--sdg-7)"><b>1</b>Ideate</a>
+        <a href="apis.html" style="--c: var(--sdg-6)"><b>2</b>Data</a>
+        <a href="start.html" style="--c: var(--sdg-15)"><b>3</b>Build</a>
+        <a href="design.html" style="--c: var(--sdg-11)" aria-current="page"><b>4</b>Design</a>
+        <a href="start.html#ship" style="--c: var(--sdg-5)"><b>5</b>Ship</a>
       </nav>
     </div>
   </header>
@@ -35,14 +36,12 @@
         <span class="eyebrow">Make it look good · all free</span>
         <h1>Design <span class="mark">kit</span>.</h1>
         <nav class="jump" aria-label="On this page">
-          <a class="btn btn-sm" href="#sdg-brand">SDG icons</a>
+          <a class="btn btn-sm" href="#sdg-brand">SDG goals</a>
           <a class="btn btn-sm btn-ghost" href="#fonts">Fonts</a>
           <a class="btn btn-sm btn-ghost" href="#group-motion">Animation</a>
-          <a class="btn btn-sm btn-ghost" href="#group-ui">Components</a>
-          <a class="btn btn-sm btn-ghost" href="#group-icons">Icons</a>
+          <a class="btn btn-sm btn-ghost" href="#group-ui">Components &amp; icons</a>
           <a class="btn btn-sm btn-ghost" href="#group-viz">Charts &amp; maps</a>
           <a class="btn btn-sm btn-ghost" href="#group-art">Art &amp; music</a>
-          <a class="btn btn-sm btn-ghost" href="#sdg-colors">SDG colors</a>
           <a class="btn btn-sm btn-ghost" href="#glow-up">Glow-up</a>
         </nav>
       </div>
@@ -52,10 +51,10 @@
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Start here · straight from the UN</span>
-          <h2>The real SDG icons.</h2>
+          <h2>The real SDG icons and colors.</h2>
         </div>
-        <div class="goal-tiles" id="goal-packs"></div>
-        <p class="note" style="margin-top: 10px">Tap a goal to download its pack: social cards, a GIF and an infographic.</p>
+        <div class="goals" id="goals" role="group" aria-label="Pick a goal"></div>
+        <p class="goal-pick" id="goal-pick" aria-live="polite"></p>
         <div class="hero-actions">
           <a class="btn btn-sm" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2025/07/E-SDG-Icons-WEB.zip">17 icons (.zip)</a>
           <a class="btn btn-sm btn-ghost" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2025/07/E-SDG-logos-SDG-wheel_No-UN-Emblem.zip">Logo and wheel (.zip)</a>
@@ -96,16 +95,6 @@
       </div>
     </section>
 
-    <section class="section" id="sdg-colors">
-      <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Official SDG colors</span>
-          <h2>Use your goal’s color. Click to copy.</h2>
-        </div>
-        <div class="palette" id="palette"></div>
-      </div>
-    </section>
-
     <section class="section" id="glow-up">
       <div class="wrap">
         <div class="section-head">
@@ -130,6 +119,7 @@
             </div>
           </div>
         </div>
+        <a class="card next-step" href="start.html#ship" style="--c: var(--sdg-5)"><b>5</b><span>Next: Ship<small>Share it · demo it</small></span></a>
       </div>
     </section>
   </main>
@@ -137,7 +127,7 @@
   <footer class="site-footer">
     <div class="wrap">
       <span>Made for UN Day at UNIS. Library versions checked October 12, 2026.</span>
-      <span><a href="./">Ideas</a> · <a href="start.html">5-min setup</a> · <a href="apis.html">Live data</a> · <a href="https://github.com/unisny/UNDaySWE">Source</a></span>
+      <a href="https://github.com/unisny/UNDaySWE">Source</a>
     </div>
   </footer>
 
