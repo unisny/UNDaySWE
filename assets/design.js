@@ -2,17 +2,26 @@
 // to a version checked on 2026-10-12. Each demo is a complete mini page that
 // runs in a sandboxed iframe, and students can copy it as a starting point.
 (() => {
-  const { esc, copyText, flash, SDG_NAMES, LIGHT_TEXT } = window.UND;
+  const { esc, copyText, flash, whenVisible, SDG_NAMES, LIGHT_TEXT } = window.UND;
 
   const CATEGORIES = {
     motion: { label: 'Animation', sdg: 10 },
     ui: { label: 'Components & styling', sdg: 17 },
-    type: { label: 'Fonts & icons', sdg: 9 },
+    icons: { label: 'Icons', sdg: 9 },
     viz: { label: 'Charts & maps', sdg: 14 },
-    look: { label: 'Images & color', sdg: 15 },
+    art: { label: 'Art & music', sdg: 5 },
+    more: { label: 'More free tools', sdg: 15 },
   };
 
   const USGS = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson';
+  // strudel.cc plays whatever code is in its URL, so the beat travels in the link.
+  const STRUDEL_TUNE = `// Press play. Change a letter, then play again.
+setcps(0.5)
+stack(
+  s("bd*2, ~ sd, hh*8").bank("RolandTR909"),
+  note("<c3 a2 f2 g2>").s("sawtooth").lpf(600)
+)`;
+  const STRUDEL_URL = `https://strudel.cc/#${encodeURIComponent(btoa(STRUDEL_TUNE))}`;
   const SDG_HEX = ['#e5243b', '#dda63a', '#4c9f38', '#c5192d', '#ff3a21', '#26bde2', '#fcc30b', '#a21942', '#fd6925',
     '#dd1367', '#fd9d24', '#bf8b2e', '#3f7e44', '#0a97d9', '#56c02b', '#00689d', '#19486a'];
 
@@ -49,13 +58,12 @@
     // ---------- Animation ----------
     {
       id: 'gsap', name: 'GSAP', cat: 'motion', link: 'https://gsap.com',
-      what: 'The animation library professionals use. Slide, fade, bounce, or animate as you scroll. Now completely free, plugins included.',
       ask: 'Use GSAP from the jsDelivr CDN to animate the cards in one after another when the data loads. Keep it under one second.',
       include: '<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>',
       demo: {
         style: `
           .row { display: flex; gap: 10px; flex-wrap: wrap; }
-          .box { width: 56px; height: 56px; border-radius: 12px; }
+          .box { width: 48px; height: 48px; border-radius: 12px; }
           button { margin-top: 20px; font: inherit; padding: 8px 14px; }`,
         body: `
           <div class="row">
@@ -79,22 +87,21 @@
     },
     {
       id: 'anime', name: 'Anime.js', cat: 'motion', link: 'https://animejs.com',
-      what: 'A light animation engine that is great at staggering: ripple a grid, count numbers up, draw SVG lines.',
       ask: 'Use Anime.js v4 from the jsDelivr CDN to make the big number count up from 0 when it appears.',
       include: '<script src="https://cdn.jsdelivr.net/npm/animejs@4.5.0/dist/bundles/anime.umd.min.js"></script>',
       demo: {
         style: `
-          .num { font-size: 44px; font-weight: 800; }
-          .grid { display: grid; grid-template-columns: repeat(10, 18px); gap: 8px; margin-top: 16px; }
-          .dot { width: 18px; height: 18px; border-radius: 50%; background: #56c02b; }`,
+          .num { font-size: 40px; font-weight: 800; }
+          .grid { display: grid; grid-template-columns: repeat(10, 16px); gap: 8px; margin-top: 16px; }
+          .dot { width: 16px; height: 16px; border-radius: 50%; background: #56c02b; }`,
         body: `
           <div class="num"><span id="count">0</span> species</div>
-          <div>spotted within 2 km of UN Headquarters</div>
+          <div>spotted near UN Headquarters</div>
           <div class="grid" id="grid"></div>`,
         script: `
           const { animate, stagger } = anime;
           const grid = document.getElementById('grid');
-          for (let i = 0; i < 50; i++) grid.insertAdjacentHTML('beforeend', '<div class="dot"></div>');
+          for (let i = 0; i < 40; i++) grid.insertAdjacentHTML('beforeend', '<div class="dot"></div>');
 
           const counter = { value: 0 };
           animate(counter, {
@@ -105,18 +112,17 @@
           });
           animate('.dot', {
             scale: [0, 1],
-            delay: stagger(40, { grid: [10, 5], from: 'center' }),
+            delay: stagger(40, { grid: [10, 4], from: 'center' }),
           });`,
       },
     },
     {
       id: 'motion', name: 'Motion', cat: 'motion', link: 'https://motion.dev',
-      what: 'Smooth, springy, physics-based animation from the makers of Framer Motion. Works in plain JavaScript and in React.',
       ask: 'Use Motion (motion.dev) from the jsDelivr CDN to give the result card a springy pop-in when it appears.',
       include: '<script src="https://cdn.jsdelivr.net/npm/motion@13.4.4/dist/motion.js"></script>',
       demo: {
         style: `
-          .card { width: 220px; padding: 18px; border-radius: 16px; background: #0a97d9; color: white; }
+          .card { width: 200px; padding: 18px; border-radius: 16px; background: #0a97d9; color: white; }
           .card b { font-size: 32px; display: block; }
           button { margin-top: 18px; font: inherit; padding: 8px 14px; }`,
         body: `
@@ -133,13 +139,12 @@
     },
     {
       id: 'animatecss', name: 'Animate.css', cat: 'motion', link: 'https://animate.style',
-      what: 'Ready-made CSS animations: bounce, tada, rubber band, heartbeat. Add two class names and you’re done.',
       ask: 'Add Animate.css from cdnjs and make the winner card bounce in with animate__bounceIn.',
       include: '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">',
       demo: {
         style: `
-          h1 { font-size: 40px; margin: 10px 0 20px; display: inline-block; }
-          button { font: inherit; padding: 6px 12px; margin: 0 6px 6px 0; }`,
+          h1 { font-size: 40px; margin: 6px 0 16px; display: inline-block; }
+          button { font: inherit; font-size: 14px; padding: 6px 10px; margin: 0 4px 6px 0; }`,
         body: `
           <h1 id="title">Winner!</h1>
           <div>
@@ -163,18 +168,16 @@
     },
     {
       id: 'aos', name: 'AOS (Animate On Scroll)', cat: 'motion', link: 'https://michalsnik.github.io/aos/',
-      what: 'Sections fade, slide or zoom in as you scroll down the page. One attribute per element.',
       ask: 'Use AOS (Animate On Scroll) from the jsDelivr CDN so each section fades up as I scroll.',
       include: `
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
         <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>`,
-      note: 'Scroll inside the demo box to see it work.',
       demo: {
         style: `
-          section { height: 120px; margin-bottom: 24px; border-radius: 16px; display: grid; place-items: center;
+          section { height: 110px; margin-bottom: 20px; border-radius: 16px; display: grid; place-items: center;
             color: white; font-size: 22px; font-weight: 700; }`,
         body: `
-          <p>Scroll down ↓</p>
+          <p>Scroll in here ↓</p>
           <section style="background:#e5243b" data-aos="fade-up">No poverty</section>
           <section style="background:#dda63a" data-aos="fade-right">Zero hunger</section>
           <section style="background:#4c9f38" data-aos="zoom-in">Good health</section>
@@ -185,11 +188,12 @@
     },
     {
       id: 'confetti', name: 'canvas-confetti', cat: 'motion', link: 'https://www.kirilv.com/canvas-confetti/',
-      what: 'Confetti. That’s it. Perfect for “you got it right!” moments.',
       ask: 'When the user gets the answer right, fire confetti with canvas-confetti from the jsDelivr CDN.',
       include: '<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.js"></script>',
       demo: {
-        style: 'button { font: inherit; font-size: 20px; padding: 12px 20px; }',
+        style: `
+          body { display: grid; place-items: center; height: 100vh; box-sizing: border-box; }
+          button { font: inherit; font-size: 20px; padding: 12px 20px; }`,
         body: '<button id="yay">I got it right!</button>',
         script: `
           document.getElementById('yay').onclick = () => {
@@ -198,36 +202,46 @@
       },
     },
     {
-      id: 'lottie', name: 'LottieFiles', cat: 'motion', link: 'https://lottiefiles.com/free-animations', account: '13+',
-      what: 'Thousands of free, designer-made animations (loaders, weather icons, celebrations) that you drop in with one tag.',
+      id: 'lottie', name: 'LottieFiles', cat: 'motion', link: 'https://lottiefiles.com/free-animations', badge: 'Free account, 13+',
       ask: 'Show this Lottie animation while the data loads, using the dotlottie-wc web component from the jsDelivr CDN: PASTE-THE-ANIMATION-LINK',
       include: '<script type="module" src="https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-wc@0.9.28/dist/dotlottie-wc.js"></script>',
-      note: 'Browse free animations without an account. To download one or copy its link you need a free LottieFiles account (13+). Free animations can be used and changed without paying.',
       demo: {
+        style: 'body { display: grid; place-items: center; height: 100vh; box-sizing: border-box; padding: 0; }',
         body: `
           <dotlottie-wc
             src="https://lottie.host/4db68bbd-31f6-4cd8-84eb-189de081159a/IGmMCqhzpt.lottie"
-            style="width: 240px; height: 240px"
+            style="width: 200px; height: 200px"
             autoplay loop>
           </dotlottie-wc>`,
       },
     },
     {
       id: 'animista', name: 'Animista', cat: 'motion', link: 'https://animista.net',
-      what: 'Play with CSS animations, tweak the speed and style, then copy the code. Nothing to install.',
       ask: 'Here is a CSS animation from Animista: PASTE-THE-CSS. Use it on the headline when the page loads.',
+      demo: {
+        style: `
+          h1 { font-size: 38px; margin: 24px 0; animation: slide-in-blurred-top 0.6s cubic-bezier(0.23, 1, 0.32, 1) both; }
+          @keyframes slide-in-blurred-top {
+            0% { transform: translateY(-200px) scaleY(2.5) scaleX(0.2); transform-origin: 50% 0%; filter: blur(40px); opacity: 0; }
+            100% { transform: translateY(0) scaleY(1) scaleX(1); transform-origin: 50% 50%; filter: blur(0); opacity: 1; }
+          }
+          button { font: inherit; padding: 8px 14px; }`,
+        body: `
+          <h1 id="title">Slide in, blurred</h1>
+          <button id="again">Play again</button>`,
+        script: `
+          const title = document.getElementById('title');
+          document.getElementById('again').onclick = () => {
+            title.style.animation = 'none';
+            void title.offsetWidth; // lets the same animation play again
+            title.style.animation = '';
+          };`,
+      },
     },
 
     // ---------- Components & styling ----------
     {
-      id: 'shadcn', name: 'shadcn/ui', cat: 'ui', link: 'https://ui.shadcn.com', react: true,
-      what: 'The component set behind a huge number of today’s apps: buttons, dialogs, cards, tabs, charts. You copy the code into your project, so you own it.',
-      ask: 'Build this as a React app with Tailwind and shadcn/ui components.',
-      note: 'Needs a React project, for example ChatGPT’s Canvas in React mode or Lane 3 (Codespaces). Want the same look in a single HTML file? Use Basecoat, next.',
-    },
-    {
       id: 'basecoat', name: 'Basecoat', cat: 'ui', link: 'https://basecoatui.com',
-      what: 'The shadcn/ui look with plain HTML classes and no React. Add one stylesheet, then use classes like btn, card and input.',
       ask: 'Style the page with Basecoat (the shadcn/ui look for plain HTML) from the jsDelivr CDN: use its btn, card, input and badge classes.',
       include: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css">',
       demo: {
@@ -250,30 +264,22 @@
       },
     },
     {
-      id: 'magicui', name: 'Magic UI', cat: 'ui', link: 'https://magicui.design', react: true,
-      what: 'Free animated components built on shadcn/ui: shimmer buttons, marquees, number tickers, spinning globes.',
-      ask: 'In my React app, use Magic UI’s Number Ticker for the big statistic.',
-      note: 'Needs React, like shadcn/ui. The free components are open source; some templates cost money.',
-    },
-    {
       id: 'tailwind', name: 'Tailwind CSS', cat: 'ui', link: 'https://tailwindcss.com',
-      what: 'Style everything with short class names right in your HTML, like p-6 rounded-2xl shadow-xl. Most AI tools already write Tailwind.',
       ask: 'Style it with Tailwind CSS using the browser build from the jsDelivr CDN.',
       include: '<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.3/dist/index.global.js"></script>',
-      note: 'The browser build is meant for prototypes, which is exactly what you’re making today.',
       demo: {
         body: `
           <div class="max-w-sm rounded-2xl bg-white p-6 shadow-xl ring-1 ring-black/5">
             <p class="text-sm font-semibold uppercase tracking-wide text-emerald-700">SDG 15 · Life on land</p>
             <h2 class="mt-2 text-3xl font-bold text-gray-900">1,476 species</h2>
-            <p class="mt-1 text-gray-600">spotted within 2 km of UN Headquarters.</p>
+            <p class="mt-1 text-gray-600">spotted near UN Headquarters.</p>
             <button class="mt-4 rounded-full bg-gray-900 px-4 py-2 font-semibold text-white hover:bg-emerald-700">See them</button>
           </div>`,
+        height: 280,
       },
     },
     {
       id: 'daisyui', name: 'daisyUI', cat: 'ui', link: 'https://daisyui.com',
-      what: 'Ready-made Tailwind components (buttons, cards, badges, progress bars) plus 30+ color themes you switch with one attribute.',
       ask: 'Use Tailwind plus daisyUI from the jsDelivr CDN, with the "cupcake" theme.',
       include: `
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.3/dist/index.global.js"></script>
@@ -291,7 +297,7 @@
             <button class="btn btn-accent btn-outline">Accent</button>
           </div>
           <div class="mt-4 flex gap-2"><span class="badge badge-success">SDG 13</span><span class="badge badge-info">SDG 14</span></div>
-          <progress class="progress progress-primary mt-4 w-64" value="77" max="100"></progress>
+          <progress class="progress progress-primary mt-4 w-56" value="77" max="100"></progress>
           <div class="alert alert-info mt-4 max-w-sm">77% of Kenyans have electricity.</div>`,
         script: `
           document.documentElement.dataset.theme = 'cupcake';
@@ -301,7 +307,6 @@
     },
     {
       id: 'pico', name: 'Pico CSS', cat: 'ui', link: 'https://picocss.com',
-      what: 'Write plain HTML, add one line, and it instantly looks clean, with dark mode built in. No class names to learn.',
       ask: 'Use Pico CSS from the jsDelivr CDN so the plain HTML looks clean, and don’t add other CSS frameworks.',
       include: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.min.css">',
       demo: {
@@ -314,66 +319,19 @@
               <button>Check the air</button>
             </article>
           </main>`,
-        height: 330,
+        height: 340,
       },
-    },
-    {
-      id: 'uiverse', name: 'Uiverse', cat: 'ui', link: 'https://uiverse.io',
-      what: 'Thousands of free, community-made buttons, loaders, toggles and cards in plain CSS or Tailwind. Copy, paste, done.',
-      ask: 'Here is a loader from Uiverse: PASTE-THE-HTML-AND-CSS. Show it while the data loads.',
     },
 
-    // ---------- Fonts & icons ----------
+    // ---------- Icons ----------
     {
-      id: 'googlefonts', name: 'Google Fonts', cat: 'type', link: 'https://fonts.google.com',
-      what: 'Over a thousand free font families. Pick one for headings and one for text, then paste one link tag.',
-      ask: 'Use the Google Fonts "Bricolage Grotesque" for headings and "Inter" for body text.',
-      include: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=Inter&display=swap">',
-      demo: {
-        include: '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@800&family=Space+Grotesk:wght@700&family=Fraunces:wght@800&family=DM+Serif+Display&family=Bebas+Neue&family=Caveat:wght@700&family=Press+Start+2P&family=Inter&display=swap">',
-        style: `
-          #sample { font-size: 34px; line-height: 1.15; margin: 16px 0 8px; }
-          p { font-family: 'Inter', sans-serif; color: #555; }`,
-        body: `
-          <select id="font">
-            <option>Bricolage Grotesque</option><option>Space Grotesk</option><option>Fraunces</option>
-            <option>DM Serif Display</option><option>Bebas Neue</option><option>Caveat</option><option>Press Start 2P</option>
-          </select>
-          <div id="sample">While you slept, Earth shook 82 times.</div>
-          <p>Body text in Inter, which is easy to read at small sizes.</p>`,
-        script: `
-          const sample = document.getElementById('sample');
-          const pick = document.getElementById('font');
-          const show = () => { sample.style.fontFamily = "'" + pick.value + "', sans-serif"; };
-          pick.onchange = show;
-          show();`,
-      },
-    },
-    {
-      id: 'fontshare', name: 'Fontshare', cat: 'type', link: 'https://www.fontshare.com',
-      what: 'Free, high-quality fonts from the Indian Type Foundry, like Satoshi and Clash Display. Free for personal and commercial use.',
-      ask: 'Use the Fontshare fonts "Clash Display" for headings and "Satoshi" for text, with one link tag per font.',
-      include: `
-        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600&display=swap">
-        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400&display=swap">`,
-      demo: {
-        style: `
-          h1 { font-family: 'Clash Display', sans-serif; font-size: 40px; margin: 0 0 8px; }
-          p { font-family: 'Satoshi', sans-serif; font-size: 18px; }`,
-        body: `
-          <h1>Snack Battle</h1>
-          <p>Two barcodes enter. One leaves. Health, planet and processing: best of three.</p>`,
-      },
-    },
-    {
-      id: 'lucide', name: 'Lucide icons', cat: 'type', link: 'https://lucide.dev',
-      what: 'More than a thousand clean, matching icons. The same set shadcn/ui uses.',
+      id: 'lucide', name: 'Lucide icons', cat: 'icons', link: 'https://lucide.dev',
       ask: 'Add Lucide icons from the jsDelivr CDN next to each number, using <i data-lucide="..."> and lucide.createIcons().',
       include: '<script src="https://cdn.jsdelivr.net/npm/lucide@1.48.0/dist/umd/lucide.min.js"></script>',
       demo: {
         style: `
           .icons { display: flex; flex-wrap: wrap; gap: 14px; color: #3f7e44; }
-          .icons svg { width: 36px; height: 36px; }`,
+          .icons svg { width: 34px; height: 34px; }`,
         body: `
           <div class="icons">
             <i data-lucide="globe"></i><i data-lucide="droplets"></i><i data-lucide="sprout"></i>
@@ -382,33 +340,32 @@
             <i data-lucide="trees"></i><i data-lucide="heart-pulse"></i><i data-lucide="graduation-cap"></i>
           </div>`,
         script: 'lucide.createIcons();',
+        height: 160,
       },
     },
     {
-      id: 'phosphor', name: 'Phosphor Icons', cat: 'type', link: 'https://phosphoricons.com',
-      what: 'A big, flexible icon family with six weights, from thin to fill. Add a stylesheet, then type <i class="ph ph-leaf"></i>.',
+      id: 'phosphor', name: 'Phosphor Icons', cat: 'icons', link: 'https://phosphoricons.com',
       ask: 'Use Phosphor Icons from the jsDelivr CDN (regular and fill styles) for the icons.',
       include: `
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.css">`,
       demo: {
-        style: '.icons { display: flex; flex-wrap: wrap; gap: 14px; font-size: 40px; color: #0a97d9; }',
+        style: '.icons { display: flex; flex-wrap: wrap; gap: 14px; font-size: 38px; color: #0a97d9; }',
         body: `
           <div class="icons">
             <i class="ph ph-globe-hemisphere-west"></i><i class="ph-fill ph-drop"></i><i class="ph ph-plant"></i>
             <i class="ph-fill ph-sun"></i><i class="ph ph-wind"></i><i class="ph-fill ph-leaf"></i>
             <i class="ph ph-bicycle"></i><i class="ph ph-recycle"></i><i class="ph-fill ph-fish"></i>
           </div>`,
+        height: 160,
       },
     },
 
     // ---------- Charts & maps ----------
     {
       id: 'chartjs', name: 'Chart.js', cat: 'viz', link: 'https://www.chartjs.org',
-      what: 'Bar, line, pie and radar charts from your data in a few lines. The easiest way to chart real data.',
       ask: 'Show the yearly values as a Chart.js line chart, loaded from the jsDelivr CDN.',
       include: '<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>',
-      note: 'The demo charts live earthquake data from the last 24 hours.',
       demo: {
         body: '<canvas id="chart"></canvas>',
         script: `
@@ -424,20 +381,19 @@
                 type: 'bar',
                 data: {
                   labels: ['Under 1', '1–2', '2–3', '3–4', '4–5', '5+'],
-                  datasets: [{ label: 'Earthquakes in the last 24 hours, by magnitude', data: counts, backgroundColor: '#fd6925' }],
+                  datasets: [{ label: 'Earthquakes today, by magnitude', data: counts, backgroundColor: '#fd6925' }],
                 },
               });
             });`,
+        height: 260,
       },
     },
     {
       id: 'leaflet', name: 'Leaflet', cat: 'viz', link: 'https://leafletjs.com',
-      what: 'Interactive maps with free OpenStreetMap tiles. Zoom, pan, markers, popups. No key needed.',
       ask: 'Put the results on a Leaflet map (from the jsDelivr CDN) with OpenStreetMap tiles and a popup on each marker.',
       include: `
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
         <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>`,
-      note: 'The demo maps every earthquake from the last 24 hours. Click a circle.',
       demo: {
         style: `
           body { padding: 0; }
@@ -460,111 +416,230 @@
                   .addTo(map);
               }
             });`,
-        height: 320,
+        height: 260,
       },
     },
     {
       id: 'd3', name: 'D3.js', cat: 'viz', link: 'https://d3js.org',
-      what: 'The most powerful data-visualization library, behind many newsroom graphics. Harder to learn, but your AI knows it well.',
       ask: 'Use D3.js v7 from the jsDelivr CDN to draw an animated bubble chart of the data.',
       include: '<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>',
+      demo: {
+        style: `
+          body { padding: 0; }
+          svg { display: block; width: 100%; height: 100vh; }`,
+        body: '<svg id="chart"></svg>',
+        script: `
+          fetch('${USGS}')
+            .then((response) => response.json())
+            .then((data) => {
+              const svg = d3.select('#chart');
+              const { width, height } = svg.node().getBoundingClientRect();
+              const quakes = data.features.filter((quake) => quake.properties.mag > 0);
+              const root = d3.pack().size([width, height]).padding(2)(
+                d3.hierarchy({ children: quakes }).sum((quake) => (quake.properties ? quake.properties.mag ** 2 : 0)));
+
+              const bubbles = svg.selectAll('circle')
+                .data(root.leaves())
+                .join('circle')
+                .attr('cx', (d) => d.x)
+                .attr('cy', (d) => d.y)
+                .attr('fill', (d) => d3.interpolateYlOrRd(d.data.properties.mag / 6));
+              bubbles.append('title').text((d) => 'M' + d.data.properties.mag + ', ' + d.data.properties.place);
+              bubbles.attr('r', 0)
+                .transition().duration(800).delay((d, i) => i * 4)
+                .attr('r', (d) => d.r);
+            });`,
+        height: 260,
+      },
     },
 
-    // ---------- Images & color ----------
+    // ---------- Art & music ----------
     {
-      id: 'undraw', name: 'unDraw', cat: 'look', link: 'https://undraw.co',
-      what: 'Free illustrations you can recolor to match your app before downloading. No credit line needed.',
-      ask: 'Use this unDraw illustration on the empty state, recolored to my accent color: PASTE-THE-SVG',
+      id: 'strudel', name: 'Strudel', cat: 'art', link: 'https://strudel.cc',
+      ask: 'Add this Strudel music player to my page, full width.',
+      include: `<iframe src="${STRUDEL_URL}" width="600" height="300"></iframe>`,
+      demo: { embed: STRUDEL_URL, height: 320, wide: true },
     },
     {
-      id: 'unsplash', name: 'Unsplash', cat: 'look', link: 'https://unsplash.com',
-      what: 'Millions of free, high-quality photos. Free to use; crediting the photographer is a nice touch.',
-      ask: 'Use this Unsplash photo as the header background with a dark overlay so the text stays readable: PASTE-THE-IMAGE-URL',
+      id: 'p5', name: 'p5.js', cat: 'art', link: 'https://editor.p5js.org',
+      ask: 'Use p5.js from the jsDelivr CDN to draw a moving background in my SDG colors that follows the mouse.',
+      include: '<script src="https://cdn.jsdelivr.net/npm/p5@2.3.4/lib/p5.min.js"></script>',
+      demo: {
+        style: `
+          body { padding: 0; }
+          canvas { display: block; }`,
+        body: '',
+        script: `
+          const colors = ['#e5243b', '#fcc30b', '#4c9f38', '#26bde2', '#fd6925', '#dd1367'];
+          function setup() {
+            createCanvas(windowWidth, windowHeight);
+            noStroke();
+          }
+          function draw() {
+            background(255, 30); // see-through, so moving dots leave trails
+            const t = frameCount * 0.005;
+            colors.forEach((hex, i) => {
+              fill(hex);
+              circle(noise(i, t) * width, noise(i + 9, t) * height, 28);
+            });
+            if (mouseX + mouseY > 0) {
+              fill(random(colors));
+              circle(mouseX, mouseY, 16);
+            }
+          }`,
+        height: 240,
+        allow: 'accelerometer *; gyroscope *', // p5 listens for phone tilt; without this the console fills with errors
+      },
     },
     {
-      id: 'coolors', name: 'Coolors', cat: 'look', link: 'https://coolors.co', account: 'optional',
-      what: 'Press the spacebar to generate color palettes that work together. Lock the colors you like and keep going.',
-      ask: 'Use this color palette from Coolors throughout the app: PASTE-THE-HEX-CODES',
-    },
-    {
-      id: 'realtimecolors', name: 'Realtime Colors', cat: 'look', link: 'https://www.realtimecolors.com',
-      what: 'Try your colors and fonts on a realistic website before you commit, then export them as CSS.',
-      ask: 'Use these CSS color variables from Realtime Colors: PASTE-THE-CSS',
+      id: 'hydra', name: 'Hydra', cat: 'art', link: 'https://hydra.ojack.xyz',
+      ask: 'Use hydra-synth from the jsDelivr CDN to make a live, animated background behind my headline.',
+      include: '<script src="https://cdn.jsdelivr.net/npm/hydra-synth@1.4.0/dist/hydra-synth.js"></script>',
+      demo: {
+        style: `
+          body { padding: 0; overflow: hidden; }
+          canvas { display: block; }`,
+        body: '',
+        script: `
+          new Hydra({ detectAudio: false, width: innerWidth, height: innerHeight });
+          osc(20, 0.08, 1.4)
+            .kaleid(6)
+            .rotate(0, 0.1)
+            .modulate(noise(3), 0.15)
+            .out();`,
+        height: 240,
+      },
     },
   ];
 
-  // ---------- rendering ----------
+  // Tools that are websites, not libraries, so there's nothing to demo. Listed under their group.
+  const LINKS = {
+    art: [
+      { name: 'CodePen', note: 'HTML, CSS & JS playground · 18+, or a parent signs up', link: 'https://codepen.io' },
+      { name: 'Teachable Machine', note: 'train an AI on your webcam · no account', link: 'https://teachablemachine.withgoogle.com' },
+      { name: 'ml5.js', note: 'friendly AI for p5.js', link: 'https://ml5js.org' },
+    ],
+    more: [
+      { name: 'shadcn/ui', note: 'React components', link: 'https://ui.shadcn.com' },
+      { name: 'Magic UI', note: 'animated React components', link: 'https://magicui.design' },
+      { name: 'Uiverse', note: 'copy-paste buttons & loaders', link: 'https://uiverse.io' },
+      { name: 'unDraw', note: 'free illustrations', link: 'https://undraw.co' },
+      { name: 'Unsplash', note: 'free photos', link: 'https://unsplash.com' },
+      { name: 'Coolors', note: 'palette generator', link: 'https://coolors.co' },
+      { name: 'Realtime Colors', note: 'try colors on a real page', link: 'https://www.realtimecolors.com' },
+    ],
+  };
 
-  const badge = (text, slow) => `<span class="badge${slow ? ' slow' : ''}">${text}</span>`;
+  // ---------- Kit cards with live demos ----------
+
+  const askText = (item) => (item.include ? `${item.ask}\n\nLoad it with:\n${dedent(item.include)}` : item.ask);
+  // An embedded site's demo code is just its iframe. Anything else becomes a full mini page (a demo's own include wins).
+  const demoHtml = (item) => (item.demo.embed ? item.include : page({ include: item.include, ...item.demo }));
 
   function cardHtml(item) {
-    const cat = CATEGORIES[item.cat];
-    const account = { '13+': 'Free account, 13+', optional: 'Account optional' }[item.account] || 'No account';
-    const badges = badge(item.react ? 'Needs React' : 'One HTML file', item.react)
-      + badge(account, item.account === '13+');
-    const include = item.include ? `
-        <div class="codeblock"><pre id="inc-${item.id}">${esc(dedent(item.include))}</pre><button type="button" class="copy" data-copy="#inc-${item.id}">Copy</button></div>` : '';
     return `
-      <article class="card api" id="kit-${item.id}" style="--c: var(--sdg-${cat.sdg})">
-        <div class="api-top">
+      <article class="card kit${item.demo.wide ? ' wide' : ''}" id="kit-${item.id}" style="--c: var(--sdg-${CATEGORIES[item.cat].sdg})">
+        <div class="kit-top">
           <h3>${esc(item.name)}</h3>
-          <div class="badges">${badges}</div>
+          ${item.badge ? `<span class="badge">${esc(item.badge)}</span>` : ''}
+          <a class="copy" href="${esc(item.link)}" target="_blank" rel="noopener">Site ↗</a>
         </div>
-        <p>${esc(item.what)}</p>
-        <div class="idea"><b>Tell your AI</b><span id="ask-${item.id}">${esc(item.ask)}</span></div>
-        ${include}
+        <div class="demo" style="--h: ${item.demo.height || 220}px"></div>
         <div class="api-actions">
-          ${item.demo ? '<button type="button" class="btn btn-sm" data-demo>Try it live</button>' : ''}
-          <button type="button" class="btn btn-sm btn-ghost" data-copy="#ask-${item.id}">Copy AI sentence</button>
-          <a class="btn btn-sm btn-ghost" href="${esc(item.link)}" target="_blank" rel="noopener">Website ↗</a>
+          <button type="button" class="btn btn-sm" data-ask>Copy AI sentence</button>
+          <button type="button" class="copy" data-code>Copy demo code</button>
         </div>
-        ${item.note ? `<p class="note">${esc(item.note)}</p>` : ''}
-        <div class="demo" hidden></div>
       </article>`;
   }
 
-  function showDemo(item, card) {
-    const box = card.querySelector('.demo');
-    const html = page({ include: item.include, ...item.demo }); // a demo's own include wins
-    box.hidden = false;
-    box.innerHTML = `
-      <iframe title="${esc(item.name)} demo" sandbox="allow-scripts" loading="lazy" style="--h: ${item.demo.height || 260}px"></iframe>
-      <details>
-        <summary>See the code for this demo</summary>
-        <div class="codeblock"><pre id="demo-${item.id}"></pre><button type="button" class="copy" data-copy="#demo-${item.id}">Copy</button></div>
-      </details>`;
-    box.querySelector('iframe').srcdoc = html;
-    box.querySelector('pre').textContent = html;
-    card.querySelector('[data-demo]').textContent = 'Restart demo';
-  }
-
   function mountKit(root) {
-    root.innerHTML = Object.entries(CATEGORIES).map(([id, cat]) => `
+    const linkHtml = (t) => `<a href="${esc(t.link)}" target="_blank" rel="noopener">${esc(t.name)} <span>${esc(t.note)}</span></a>`;
+    root.innerHTML = Object.entries(CATEGORIES).map(([id, cat]) => {
+      const cards = KIT.filter((item) => item.cat === id).map(cardHtml).join('');
+      const links = (LINKS[id] || []).map(linkHtml).join('');
+      return `
       <section class="kit-group" id="group-${id}">
         <h2>${esc(cat.label)}</h2>
-        <div class="api-grid">${KIT.filter((item) => item.cat === id).map(cardHtml).join('')}</div>
-      </section>`).join('');
+        ${cards && `<div class="kit-grid">${cards}</div>`}
+        ${links && `<div class="tool-links">${links}</div>`}
+      </section>`;
+    }).join('');
 
-    root.addEventListener('click', (e) => {
-      const button = e.target.closest('[data-demo]');
+    for (const item of KIT) {
+      const box = document.querySelector(`#kit-${item.id} .demo`);
+      whenVisible(box, () => {
+        const frame = document.createElement('iframe');
+        frame.title = `${item.name} demo`;
+        if (item.demo.embed) {
+          frame.src = item.demo.embed; // a real site: unsandboxed, so it keeps its own storage and sound
+        } else {
+          frame.sandbox = 'allow-scripts';
+          if (item.demo.allow) frame.allow = item.demo.allow;
+          frame.srcdoc = demoHtml(item);
+        }
+        box.append(frame);
+      });
+    }
+
+    root.addEventListener('click', async (e) => {
+      const button = e.target.closest('[data-ask], [data-code]');
       if (!button) return;
-      const card = button.closest('.api');
-      showDemo(KIT.find((item) => `kit-${item.id}` === card.id), card);
+      const item = KIT.find((k) => `kit-${k.id}` === button.closest('.kit').id);
+      flash(button, await copyText(button.matches('[data-ask]') ? askText(item) : demoHtml(item)));
     });
   }
 
-  function mountPalette(root) {
-    root.innerHTML = SDG_HEX.map((hex, i) => `
-      <button type="button" class="swatch" style="--c: ${hex}" data-hex="${hex}" title="Copy ${hex}">
-        <span class="chip" aria-hidden="true"></span>
-        <span><b>SDG ${i + 1}</b> ${esc(SDG_NAMES[i + 1])}</span>
-        <code>${hex.toUpperCase()}</code>
+  // ---------- Fonts: type once, see it in nine fonts ----------
+
+  const FONTS = [
+    { name: 'Bricolage Grotesque', weight: 800 },
+    { name: 'Space Grotesk', weight: 700 },
+    { name: 'Fraunces', weight: 800 },
+    { name: 'DM Serif Display', weight: 400 },
+    { name: 'Bebas Neue', weight: 400, scale: 1.3 },
+    { name: 'Caveat', weight: 700, scale: 1.25 },
+    { name: 'Press Start 2P', weight: 400, scale: 0.6 },
+    { name: 'Clash Display', weight: 600, fontshare: 'clash-display' },
+    { name: 'Satoshi', weight: 700, fontshare: 'satoshi' },
+  ];
+
+  function fontAsk(font) {
+    if (!font.fontshare) return `Use the Google Font "${font.name}" (weight ${font.weight}) for headings and "Inter" for body text.`;
+    return `Use the Fontshare font "${font.name}" for headings, loaded with `
+      + `<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=${font.fontshare}@${font.weight}&display=swap">, `
+      + 'and the Google Font "Inter" for body text.';
+  }
+
+  function mountFonts(root) {
+    const input = document.getElementById('font-text');
+    root.innerHTML = FONTS.map((font, i) => `
+      <button type="button" class="font-card" data-font="${i}" style="--f: '${font.name}'; --w: ${font.weight}; --s: ${font.scale || 1}">
+        <span class="sample"></span>
+        <span class="meta"><span>${esc(font.name)} · ${font.fontshare ? 'Fontshare' : 'Google Fonts'}</span><em>Copy</em></span>
       </button>`).join('');
+    const samples = root.querySelectorAll('.sample');
+    const show = () => { for (const s of samples) s.textContent = input.value.trim() || 'Your app name'; };
+    input.addEventListener('input', show);
+    show();
+    root.addEventListener('click', async (e) => {
+      const card = e.target.closest('[data-font]');
+      if (card) flash(card.querySelector('em'), await copyText(fontAsk(FONTS[card.dataset.font])));
+    });
+  }
+
+  // ---------- SDG colors and the official goal packs ----------
+
+  function mountPalette(root) {
+    root.innerHTML = SDG_HEX.map((hex, i) => {
+      const code = hex.toUpperCase();
+      return `
+      <button type="button" class="swatch${LIGHT_TEXT.has(i + 1) ? ' light-text' : ''}" style="--c: ${hex}" data-hex="${code}" title="Goal ${i + 1}: ${esc(SDG_NAMES[i + 1])}. Click to copy ${code}">
+        <b>${i + 1}</b><code>${code}</code>
+      </button>`;
+    }).join('');
     root.addEventListener('click', async (e) => {
       const swatch = e.target.closest('[data-hex]');
-      if (!swatch) return;
-      const code = swatch.querySelector('code');
-      flash(code, await copyText(swatch.dataset.hex.toUpperCase()));
+      if (swatch) flash(swatch.querySelector('code'), await copyText(swatch.dataset.hex));
     });
   }
 
@@ -580,12 +655,47 @@
     }).join('');
   }
 
-  const packs = document.getElementById('goal-packs');
-  if (packs) mountGoalPacks(packs);
-  const kit = document.getElementById('kit');
-  if (kit) mountKit(kit);
-  const palette = document.getElementById('palette');
-  if (palette) mountPalette(palette);
+  // ---------- Glow-up: each prompt changes one mock app ----------
+
+  const GLOW = [
+    { name: 'Fonts', cls: 'g-fonts', prompt: 'Use the Google Fonts "Bricolage Grotesque" for headings and "Inter" for everything else, with a warm off-white background (#F6F3EA) and generous spacing.' },
+    { name: 'Color', cls: 'g-color', prompt: 'Pick one accent color and use it everywhere it matters: the official SDG 13 green, #3F7E44.' },
+    { name: 'Loading', cls: 'g-load', prompt: 'While the data loads, show grey placeholder boxes in the shape of the content instead of a blank screen.' },
+    { name: 'Motion', cls: 'g-motion', prompt: 'When the data arrives, animate the cards in one after another with GSAP from the jsDelivr CDN. Keep it under one second, and skip it for people who turned on “reduce motion”.' },
+    { name: 'Phone', cls: 'g-phone', prompt: 'Make it look great on a phone first, then on a laptop. Buttons should be big enough to tap.' },
+  ];
+
+  function mountGlow(steps) {
+    const app = document.getElementById('glow-app');
+    const prompt = document.getElementById('glow-prompt');
+    let timer;
+    steps.innerHTML = GLOW.map((step, i) => `<li><button type="button" data-step="${i + 1}" aria-pressed="false">${step.name}</button></li>`).join('')
+      + '<li><button type="button" data-step="0">Start over</button></li>';
+
+    steps.addEventListener('click', (e) => {
+      const button = e.target.closest('[data-step]');
+      if (!button) return;
+      const level = Number(button.dataset.step);
+      GLOW.forEach((step, i) => app.classList.toggle(step.cls, i < level));
+      for (const b of steps.querySelectorAll('[data-step]')) {
+        const n = Number(b.dataset.step);
+        b.classList.toggle('on', n > 0 && n <= level);
+        if (n) b.setAttribute('aria-pressed', String(n === level));
+      }
+      prompt.parentElement.hidden = level === 0;
+      if (level) prompt.textContent = GLOW[level - 1].prompt;
+      // From the Loading step on, replay a fake load so the placeholders and motion show.
+      clearTimeout(timer);
+      app.classList.toggle('loading', level >= 3);
+      if (level >= 3) timer = setTimeout(() => app.classList.remove('loading'), 1200);
+    });
+  }
+
+  const mounts = { 'goal-packs': mountGoalPacks, 'font-grid': mountFonts, kit: mountKit, palette: mountPalette, 'glow-steps': mountGlow };
+  for (const [id, mount] of Object.entries(mounts)) {
+    const el = document.getElementById(id);
+    if (el) mount(el);
+  }
   // The cards render after the browser has already jumped to #hash, so jump again.
   document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: 'instant' });
 })();

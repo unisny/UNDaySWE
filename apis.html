@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Live Data APIs · UN Day</title>
-  <meta name="description" content="Free, no-key APIs with real-world data for student projects: climate, earthquakes, wildlife, food, countries, cities, books, art and space. Try each one live.">
+  <meta name="description" content="Free, no-key APIs with real-world data for student projects: climate, earthquakes, wildlife, food, countries, cities, books, art and space. Each one shows its live data.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,13 +30,8 @@
   <main id="main">
     <section class="hero">
       <div class="wrap">
-        <span class="eyebrow">Real-world data · no keys · no signup</span>
+        <span class="eyebrow">No keys · no signup · tested Oct 12, 2026</span>
         <h1>Live data,<br><span class="mark">zero</span> setup.</h1>
-        <p class="lede">Every API here returns real data the moment you ask: no account, no API key, no credit card. Each one was tested from a web page on October 12, 2026. Press <b>Try it live</b> to see what it sends back right now.</p>
-        <div class="hero-actions">
-          <a class="btn" href="#un-sdg">Start with the UN’s own data ↓</a>
-          <a class="btn btn-ghost" href="#catalog">Browse all 33 APIs</a>
-        </div>
       </div>
     </section>
 
@@ -44,19 +39,11 @@
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Start here · straight from the UN</span>
-          <h2>The UN’s official SDG data, live.</h2>
-          <p>The UN Statistics Division runs a free API with the official numbers for all 17 goals and 169 targets, for every country and region. It’s the same database the UN uses for its yearly SDG progress report. No key needed.</p>
-          <div class="hero-actions">
-            <a class="btn" href="https://unstats.un.org/sdgapi/swagger/" target="_blank" rel="noopener">Open the API docs (Swagger) ↗</a>
-          </div>
-          <p class="small muted" style="margin-top: 14px"><b>Tip:</b> Swagger is a clickable menu of everything the API can do. Open an endpoint, press <b>Try it out</b>, then <b>Execute</b> to see real data without writing any code.</p>
+          <h2>The UN’s official SDG numbers.</h2>
         </div>
 
         <div class="card explorer" id="sdg-explorer" style="--c: var(--sdg-7)">
-          <div>
-            <p class="small muted" style="margin: 0 0 8px">Pick a goal</p>
-            <div class="goal-tiles" id="sdg-goals" role="group" aria-label="Pick a goal"></div>
-          </div>
+          <div class="goal-tiles" id="sdg-goals" role="group" aria-label="Pick a goal"></div>
           <h3 id="sdg-goal-name">Loading the goals…</h3>
           <div class="explorer-controls">
             <div class="field"><label for="sdg-indicator">Indicator</label><select id="sdg-indicator"></select></div>
@@ -66,32 +53,26 @@
           <div class="series-grid" id="sdg-result" aria-live="polite"></div>
           <div class="endpoint"><code id="sdg-url"></code><button type="button" class="copy" id="sdg-copy-url">Copy URL</button></div>
           <div class="api-actions">
-            <button type="button" class="btn btn-sm" id="sdg-prompt">Copy a starter prompt for this</button>
-            <a class="btn btn-sm btn-ghost" href="https://unstats.un.org/sdgapi/swagger/" target="_blank" rel="noopener">Swagger docs ↗</a>
+            <button type="button" class="btn btn-sm" id="sdg-prompt">Copy starter prompt</button>
+            <a class="copy" href="https://unstats.un.org/sdgapi/swagger/" target="_blank" rel="noopener">API docs ↗</a>
           </div>
         </div>
-
-        <details class="callout" style="margin-top: 16px">
-          <summary>Handy endpoints to give your AI</summary>
-          <ul class="endpoint-list">
-            <li><code>https://unstats.un.org/sdgapi/v1/sdg/Goal/List?includechildren=false</code> The 17 goals</li>
-            <li><code>https://unstats.un.org/sdgapi/v1/sdg/Goal/13/Target/List?includechildren=true</code> One goal’s targets and indicators</li>
-            <li><code>https://unstats.un.org/sdgapi/v1/sdg/GeoArea/List</code> Country and region codes (World = 1, Kenya = 404, USA = 840)</li>
-            <li><code>https://unstats.un.org/sdgapi/v1/sdg/Indicator/Data?indicator=7.1.1&amp;areaCode=404&amp;pageSize=1000</code> The numbers for one indicator in one place</li>
-          </ul>
-        </details>
       </div>
     </section>
 
     <section class="section" id="catalog">
       <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">33 free APIs</span>
+          <h2>Pick your data.</h2>
+        </div>
         <div class="filters" id="filters">
           <label class="visually-hidden" for="search">Search APIs</label>
           <input class="search" id="search" type="search" placeholder="Search: ocean, food, NYC, space…">
         </div>
         <p class="result-note" id="result-note" aria-live="polite"></p>
         <div class="api-grid" id="api-grid">
-          <noscript><p>Turn on JavaScript to see the API list and try each one live.</p></noscript>
+          <noscript><p>Turn on JavaScript to see the APIs and their live data.</p></noscript>
         </div>
       </div>
     </section>
@@ -100,59 +81,30 @@
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Your first fetch</span>
-          <h2>Ten lines, live data.</h2>
-          <p>Paste this into your browser console (<kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>J</kbd> on a Mac, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>J</kbd> on Windows or a Chromebook) and press Enter. Or paste it into your AI and ask it to turn it into a real app.</p>
+          <h2>Five lines, live data.</h2>
         </div>
-        <div class="grid grid-2">
-          <div>
-            <h3>JavaScript</h3>
-            <div class="codeblock"><pre id="snippet-js">// Live earthquakes from the last 24 hours. No key needed.
-fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
-  .then((response) => response.json())
-  .then((data) => {
-    const quakes = data.features;
-    console.log("Earthquakes in the last 24 hours: " + quakes.length);
-    const biggest = quakes.reduce((a, b) => (b.properties.mag > a.properties.mag ? b : a));
-    console.log("Biggest: M" + biggest.properties.mag + ", " + biggest.properties.place);
-  });</pre><button type="button" class="copy" data-copy="#snippet-js">Copy</button></div>
+        <div class="card runner">
+          <div class="runner-bar">
+            <span>JavaScript</span>
+            <button type="button" class="btn btn-sm" id="run">▶ Run</button>
           </div>
-          <div>
-            <h3>Python</h3>
-            <div class="codeblock"><pre id="snippet-py"># Same data in Python. Run: pip install requests
-import requests
+          <div class="codeblock"><pre id="snippet-js">// Live earthquakes from the last 24 hours. No key needed.
+const response = await fetch("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson");
+const quakes = (await response.json()).features;
+console.log("Earthquakes in the last 24 hours: " + quakes.length);
 
-url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
-quakes = requests.get(url).json()["features"]
-print("Earthquakes in the last 24 hours:", len(quakes))
-
-biggest = max(quakes, key=lambda q: q["properties"]["mag"] or 0)
-print("Biggest: M", biggest["properties"]["mag"], biggest["properties"]["place"])</pre><button type="button" class="copy" data-copy="#snippet-py">Copy</button></div>
-          </div>
+const biggest = quakes.reduce((a, b) => (b.properties.mag > a.properties.mag ? b : a));
+console.log("Biggest: M" + biggest.properties.mag + ", " + biggest.properties.place);</pre><button type="button" class="copy" data-copy="#snippet-js">Copy</button></div>
+          <pre class="console" id="console" aria-live="polite"></pre>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="swapped">
-      <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Lesson from testing</span>
-          <h2>APIs break. Always have a backup.</h2>
-          <p>Some popular “free API” lists are out of date. These didn’t make the cut when we tested them, and here’s what to use instead.</p>
-        </div>
-        <ul class="swapped">
-          <li><b>Bored API:</b> the original site shut down, and the copy that’s still online blocks web pages (no CORS). Try <a href="#api-trivia">Open Trivia DB</a> or <a href="#api-meals">TheMealDB</a> for something to do.</li>
-          <li><b>Free Dictionary API:</b> was down when we tested. Use <a href="#api-wiktionary">Wiktionary</a> or <a href="#api-datamuse">Datamuse</a>.</li>
-          <li><b>Universities API</b> and <b>ip-api:</b> only work over plain <code>http://</code>, which browsers block on https websites. For location, use the browser’s own <code>navigator.geolocation</code> (it asks permission first) or let people type a city into <a href="#api-geocode">Open-Meteo Geocoding</a>.</li>
-          <li><b>REST Countries:</b> old versions were shut down and the new one needs a key. Use <a href="#api-worldbank">World Bank</a> for country data, and <code>https://flagcdn.com/w320/ke.png</code> for flags (swap <code>ke</code> for any two-letter country code).</li>
-        </ul>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>Made for the UN Day software workshop at UNIS. Data belongs to each API’s provider; check their terms before you build something big.</span>
-      <span><a href="./">Ideas</a> · <a href="start.html">5-min setup</a> · <a href="design.html">Design kit</a> · <a href="https://github.com/unisny/UNDaySWE">Source on GitHub</a></span>
+      <span>Made for UN Day at UNIS. Data belongs to each API’s provider.</span>
+      <span><a href="./">Ideas</a> · <a href="start.html">5-min setup</a> · <a href="design.html">Design kit</a> · <a href="https://github.com/unisny/UNDaySWE">Source</a></span>
     </div>
   </footer>
 

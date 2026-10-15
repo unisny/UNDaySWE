@@ -101,5 +101,26 @@
     bar.innerHTML = Array.from({ length: 17 }, (_, i) => `<span style="background: var(--sdg-${i + 1})"></span>`).join('');
   }
 
-  window.UND = { SDG_NAMES, LIGHT_TEXT, esc, sdgChip, starterPrompt, copyText, flash, store };
+  // Run fn once, the first time el scrolls near the screen. Live previews and
+  // demos use this so a page doesn't call 30 APIs the moment it opens.
+  const onVisible = new WeakMap();
+  const observer = 'IntersectionObserver' in window && new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      observer.unobserve(entry.target);
+      onVisible.get(entry.target)();
+    }
+  }, { rootMargin: '200px' });
+  function whenVisible(el, fn) {
+    if (!observer) return fn();
+    onVisible.set(el, fn);
+    observer.observe(el);
+  }
+
+  const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Grey placeholder bars shown while a live preview loads.
+  const SKELETON = '<div class="skeleton" aria-label="Loading live data"><i></i><i></i><i></i></div>';
+
+  window.UND = { SDG_NAMES, LIGHT_TEXT, SKELETON, esc, sdgChip, starterPrompt, copyText, flash, store, whenVisible, reducedMotion };
 })();

@@ -99,7 +99,7 @@
     $('sdg-target').innerHTML = `<b>The 2030 target · ${esc(target.code)}</b>${esc(target.title)}`;
     state.url = `${API}/Indicator/Data?indicator=${encodeURIComponent(indicatorSelect.value)}&areaCode=${encodeURIComponent(areaSelect.value)}&pageSize=1000`;
     $('sdg-url').textContent = state.url;
-    result.innerHTML = '<p class="status">Loading official UN data… (big indicators can take a few seconds)</p>';
+    result.innerHTML = '<p class="status">Loading official UN data…</p>';
     const request = ++state.request;
     try {
       const data = await getJson(state.url);

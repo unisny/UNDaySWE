@@ -33,46 +33,28 @@
         <div>
           <span class="eyebrow">UN Day · Software workshop</span>
           <h1>From idea<br>to <span class="mark">app</span>.</h1>
-          <p class="lede">Turn your idea into a working app using AI and real-world data. Build something useful inspired by the UN Sustainable Development Goals. No coding experience needed.</p>
+          <p class="lede">Build a real app with AI and live data, inspired by the UN Global Goals. No coding experience needed.</p>
           <div class="hero-actions">
             <a class="btn" href="start.html">Set up in 5 minutes →</a>
             <a class="btn btn-ghost" href="#sparks">Get an idea</a>
-            <a class="btn btn-ghost" href="apis.html">Browse live data</a>
           </div>
-          <p class="kicker">Today, AI handles most of the code. So the code is the easy part. <em>The idea is the hard part.</em></p>
         </div>
         <aside class="card live" aria-labelledby="live-title">
-          <div class="live-head"><span class="dot" aria-hidden="true"></span><span id="live-title">Live right now</span></div>
+          <div class="live-head"><span class="dot" aria-hidden="true"></span><span id="live-title">Live right now · free APIs</span></div>
           <ul class="live-list" id="live-list" aria-live="polite"></ul>
-          <p class="small muted">Pulled from free, no-key APIs the moment this page loaded. You can use every one of them today.</p>
         </aside>
-      </div>
-    </section>
-
-    <section class="official" aria-labelledby="official-title">
-      <div class="wrap">
-        <span class="eyebrow" id="official-title">Straight from the UN</span>
-        <div class="official-links">
-          <a href="apis.html#un-sdg" style="--c: var(--sdg-17)"><b>Official SDG data API →</b><span>The UN’s own numbers for every goal, target and country. Explore it live, no key needed.</span></a>
-          <a href="design.html#sdg-brand" style="--c: var(--sdg-13)"><b>SDG icons, logo and color wheel →</b><span>The official downloads, a pack for each goal, and the rules for using them.</span></a>
-        </div>
       </div>
     </section>
 
     <section class="section" id="today">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Your job today</span>
-          <blockquote class="quote">
-            Don’t try to fix global warming with a website. Pick one tiny, specific sliver of a global problem, grab a live public dataset, and build a tool that makes a real person go, “Huh, that actually makes sense to me now.”
-          </blockquote>
-        </div>
+        <p class="quote">Don’t try to fix global warming with a website. Pick one tiny sliver of it, and make a real person go, “Huh, that actually makes sense to me now.”</p>
         <ol class="flow">
-          <li><b>Find the annoyance</b><span>Pick one sliver of a real problem that bugs you.</span></li>
-          <li><b>Grab live data</b><span>Choose a free API from our list. No keys, no signup.</span></li>
-          <li><b>Pitch it in 3 sentences</b><span>No pitch, no prompt. That’s the rule.</span></li>
-          <li><b>Brief your AI intern</b><span>Paste a starter prompt, then improve it one step at a time.</span></li>
-          <li><b>Ship it and demo</b><span>Put it online and show a live prototype.</span></li>
+          <li><a href="#sparks" style="--c: var(--sdg-11)">Find the annoyance</a></li>
+          <li><a href="apis.html" style="--c: var(--sdg-6)">Grab live data</a></li>
+          <li><a href="#pitch" style="--c: var(--sdg-7)">Pitch it in 3 sentences</a></li>
+          <li><a href="#intern" style="--c: var(--sdg-15)">Brief your AI</a></li>
+          <li><a href="start.html#lane-2" style="--c: var(--sdg-9)">Ship it and demo</a></li>
         </ol>
       </div>
     </section>
@@ -82,90 +64,54 @@
         <div class="section-head">
           <span class="eyebrow">Four questions to steal</span>
           <h2>Start with a question you actually want answered.</h2>
-          <p>Each one comes with live data you can use today and a starter prompt to paste into your AI tool. Steal one, twist it, or use it to find your own.</p>
         </div>
 
         <div class="grid grid-2">
           <article class="card spark" style="--c: var(--sdg-11)">
-            <span class="spark-num">01 · EARTH RIGHT NOW</span>
-            <h3>How many earthquakes hit Earth while you were asleep last night?</h3>
-            <p>Usually dozens. You felt none of them. Some of them hit cities.</p>
-            <p class="twist"><b>The twist</b>Make it feel like a text from planet Earth, not a science report: “While you slept, Earth shook 82 times.” One sentence first, the map second.</p>
-            <div class="meta"><span class="sdg" style="--c: var(--sdg-11)" title="Goal 11: Sustainable Cities and Communities">SDG 11</span> Data: <a href="apis.html#api-quakes">USGS Earthquakes</a></div>
-            <details>
-              <summary>Starter prompt</summary>
-              <div class="codeblock"><pre id="prompt-quakes" data-spark="quakes"></pre><button type="button" class="copy" data-copy="#prompt-quakes">Copy</button></div>
-            </details>
+            <div class="spark-top"><span class="spark-num">01 · Earth right now</span><span class="sdg" style="--c: var(--sdg-11)" title="Goal 11: Sustainable Cities and Communities">SDG 11</span></div>
+            <h3>How many earthquakes hit Earth while you were asleep?</h3>
+            <div class="peek" data-peek="quakes" aria-live="polite"></div>
+            <div class="spark-actions">
+              <button type="button" class="btn btn-sm" data-spark="quakes">Copy starter prompt</button>
+              <a class="copy" href="apis.html#api-quakes">USGS Earthquakes →</a>
+            </div>
           </article>
 
           <article class="card spark" style="--c: var(--sdg-13)">
-            <span class="spark-num">02 · WEATHER, BUT PERSONAL</span>
-            <h3>Is your birthday hotter than it was when your grandparents were born?</h3>
-            <p>Climate change feels far away when it’s about “the planet.” Make it about one day that belongs to you.</p>
-            <p class="twist"><b>The twist</b>Build a share card people would actually post: one date, one number, one chart going back to 1940.</p>
-            <div class="meta"><span class="sdg light-text" style="--c: var(--sdg-13)" title="Goal 13: Climate Action">SDG 13</span> Data: <a href="apis.html#api-history">Open-Meteo Historical Weather</a></div>
-            <details>
-              <summary>Starter prompt</summary>
-              <div class="codeblock"><pre id="prompt-birthday" data-spark="birthday"></pre><button type="button" class="copy" data-copy="#prompt-birthday">Copy</button></div>
-            </details>
+            <div class="spark-top"><span class="spark-num">02 · Weather, but personal</span><span class="sdg light-text" style="--c: var(--sdg-13)" title="Goal 13: Climate Action">SDG 13</span></div>
+            <h3>Is your birthday hotter than when your grandparents were born?</h3>
+            <div class="peek" aria-live="polite">
+              <div class="bday-head">
+                <label for="bday">Your birthday</label><input type="date" id="bday">
+                <span id="bday-note">New York · average high that week</span>
+              </div>
+              <div class="bars" id="bday-bars"></div>
+            </div>
+            <div class="spark-actions">
+              <button type="button" class="btn btn-sm" data-spark="birthday">Copy starter prompt</button>
+              <a class="copy" href="apis.html#api-history">Historical weather →</a>
+            </div>
           </article>
 
           <article class="card spark" style="--c: var(--sdg-12)">
-            <span class="spark-num">03 · STUFF YOU BUY</span>
+            <div class="spark-top"><span class="spark-num">03 · Stuff you buy</span><span class="sdg" style="--c: var(--sdg-12)" title="Goal 12: Responsible Consumption and Production">SDG 12</span></div>
             <h3>Which snack in your bag is secretly the worst for the planet?</h3>
-            <p>Every barcode is a key to a database. Open Food Facts knows millions of them, including how they score for health and for the planet.</p>
-            <p class="twist"><b>The twist</b>Make it a game. Two snacks enter, one leaves: health, planet and how processed it is, best of three.</p>
-            <div class="meta"><span class="sdg" style="--c: var(--sdg-12)" title="Goal 12: Responsible Consumption and Production">SDG 12</span> Data: <a href="apis.html#api-food">Open Food Facts</a></div>
-            <details>
-              <summary>Starter prompt</summary>
-              <div class="codeblock"><pre id="prompt-snacks" data-spark="snacks"></pre><button type="button" class="copy" data-copy="#prompt-snacks">Copy</button></div>
-            </details>
+            <div class="peek" id="battle" aria-live="polite"></div>
+            <div class="spark-actions">
+              <button type="button" class="btn btn-sm" data-spark="snacks">Copy starter prompt</button>
+              <a class="copy" href="apis.html#api-food">Open Food Facts →</a>
+            </div>
           </article>
 
           <article class="card spark" style="--c: var(--sdg-15)">
-            <span class="spark-num">04 · NATURE NEXT DOOR</span>
-            <h3>What wild animals live within a 10-minute walk of you that you’ve never noticed?</h3>
-            <p>iNaturalist users have identified more than 1,400 species within 2 km of UN Headquarters. In Manhattan.</p>
-            <p class="twist"><b>The twist</b>Pokémon Go, but every creature is real and lives on your block. Photos, rarity, and a “caught” badge when you spot one yourself.</p>
-            <div class="meta"><span class="sdg" style="--c: var(--sdg-15)" title="Goal 15: Life on Land">SDG 15</span> Data: <a href="apis.html#api-inat">iNaturalist</a></div>
-            <details>
-              <summary>Starter prompt</summary>
-              <div class="codeblock"><pre id="prompt-wildlife" data-spark="wildlife"></pre><button type="button" class="copy" data-copy="#prompt-wildlife">Copy</button></div>
-            </details>
+            <div class="spark-top"><span class="spark-num">04 · Nature next door</span><span class="sdg" style="--c: var(--sdg-15)" title="Goal 15: Life on Land">SDG 15</span></div>
+            <h3>What wild animals live within a 10-minute walk of you?</h3>
+            <div class="peek" data-peek="inat" aria-live="polite"></div>
+            <div class="spark-actions">
+              <button type="button" class="btn btn-sm" data-spark="wildlife">Copy starter prompt</button>
+              <a class="copy" href="apis.html#api-inat">iNaturalist →</a>
+            </div>
           </article>
-        </div>
-
-        <h3 style="margin-top: 40px">More sparks, one line each</h3>
-        <ul class="mini-sparks">
-          <li><span class="sdg light-text" style="--c: var(--sdg-17)">17</span><div><div class="q">Where is the space station right now, and is it day or night down there?</div><a href="apis.html#api-iss">Where the ISS at? →</a></div></li>
-          <li><span class="sdg light-text" style="--c: var(--sdg-4)">4</span><div><div class="q">If your class were 30 teens in Kenya, how many would be online?</div><a href="apis.html#api-worldbank">World Bank →</a></div></li>
-          <li><span class="sdg light-text" style="--c: var(--sdg-13)">13</span><div><div class="q">How much hotter will July be when you’re 40?</div><a href="apis.html#api-future">Climate projections →</a></div></li>
-          <li><span class="sdg" style="--c: var(--sdg-11)">11</span><div><div class="q">Which NYC zip code reported the most rats this week?</div><a href="apis.html#api-nyc311">NYC 311 →</a></div></li>
-          <li><span class="sdg" style="--c: var(--sdg-2)">2</span><div><div class="q">What can you cook tonight with the last two things in your fridge?</div><a href="apis.html#api-meals">TheMealDB →</a></div></li>
-          <li><span class="sdg" style="--c: var(--sdg-6)">6</span><div><div class="q">Where’s the nearest free water fountain, in any city?</div><a href="apis.html#api-overpass">OpenStreetMap →</a></div></li>
-          <li><span class="sdg" style="--c: var(--sdg-11)">11</span><div><div class="q">Is there a Citi Bike at the dock outside school right now?</div><a href="apis.html#api-citibike">Citi Bike Live →</a></div></li>
-          <li><span class="sdg light-text" style="--c: var(--sdg-16)">16</span><div><div class="q">What was the weather in New York on the day the UN was born?</div><a href="apis.html#api-history">Historical weather →</a></div></li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="your-own">
-      <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">Or find your own</span>
-          <h2>Start with what’s annoying, not with a goal.</h2>
-          <p>Picking “Zero Hunger” and staring at it doesn’t work. Look for things that are broken, clunky or confusing instead. Real products start there.</p>
-        </div>
-        <div class="grid grid-2">
-          <div class="callout">
-            <h3>The annoyance scale</h3>
-            <p>The world is full of terrible software and clunky systems. What’s a piece of information that is <b>hard to find</b>, <b>hard to understand</b>, or <b>locked away</b>, and should be three clicks away for a normal human being?</p>
-          </div>
-          <div class="callout">
-            <h3>Reverse-engineer an app you love</h3>
-            <p>TikTok, Duolingo and Spotify don’t work because their databases are cool. They work because they fix a human friction point. What friction does <i>your</i> favorite app fix?</p>
-            <p>Now flip it. We have tons of climate data. The problem is that it’s boring and nobody looks at it. What would the Duolingo of climate data look like?</p>
-          </div>
         </div>
       </div>
     </section>
@@ -173,14 +119,13 @@
     <section class="section" id="pitch">
       <div class="wrap">
         <div class="section-head">
-          <span class="eyebrow">The Shark Tank rule</span>
+          <span class="eyebrow">Or pitch your own · the Shark Tank rule</span>
           <h2>No pitch, no prompt.</h2>
-          <p>If you can’t fill in these three sentences, you’re not allowed to prompt the AI yet. Once you can, this builds your first prompt for you.</p>
         </div>
         <div class="builder">
           <form class="card" id="pitch-form" autocomplete="off">
             <div class="field">
-              <label for="p-topic">1. People who care about…</label>
+              <label for="p-topic">People who care about…</label>
               <input id="p-topic" name="topic" placeholder="the air in their neighborhood">
             </div>
             <div class="field">
@@ -188,16 +133,15 @@
               <input id="p-pain" name="pain" placeholder="numbers they can’t understand on a government website">
             </div>
             <div class="field">
-              <label for="p-feature">2. Our app makes this instantly better by…</label>
+              <label for="p-feature">Our app makes this instantly better by…</label>
               <input id="p-feature" name="feature" placeholder="turning live air quality into a simple go / don’t go outside signal">
             </div>
             <div class="field">
               <label for="p-api">…using this live data</label>
               <select id="p-api" name="api"></select>
-              <p class="hint">Not sure? Browse the <a href="apis.html">live data list</a>, or pick “Let the AI suggest one”.</p>
             </div>
             <div class="field">
-              <label for="p-change">3. If this existed tomorrow, it would change how people…</label>
+              <label for="p-change">If this existed tomorrow, it would change how people…</label>
               <input id="p-change" name="change" placeholder="decide when to go for a run">
             </div>
           </form>
@@ -205,11 +149,9 @@
           <div class="card pitch-out" aria-live="polite">
             <span class="eyebrow">Your pitch</span>
             <p class="pitch-text" id="pitch-text"></p>
-            <div class="gate" id="pitch-gate"></div>
+            <p class="gate" id="pitch-gate"></p>
             <div id="pitch-prompt-wrap" hidden>
-              <h3 style="margin-top: 20px">Your first prompt</h3>
               <div class="codeblock"><pre id="pitch-prompt"></pre><button type="button" class="copy" data-copy="#pitch-prompt">Copy</button></div>
-              <p class="small muted" style="margin-top: 10px">Paste it into the AI tool from <a href="start.html">the 5-minute setup</a>.</p>
             </div>
           </div>
         </div>
@@ -220,30 +162,42 @@
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">How to work with AI</span>
-          <h2>Your AI is an expensive, lazy intern.</h2>
+          <h2>Your AI is a lazy intern. Be the architect.</h2>
         </div>
-        <blockquote class="quote" style="margin-bottom: 32px">
-          It knows every coding language perfectly, but it has zero common sense, zero creativity and no empathy. Tell it to “build a green app” and you’ll get something incredibly boring. <span style="background: color-mix(in srgb, var(--hi) 45%, transparent)">You are the architect. The AI is just holding the hammer.</span>
-        </blockquote>
-        <ul class="rules">
-          <li><b>Be specific.</b>Say who it’s for, what it shows and how it should feel. Vague in, boring out.</li>
-          <li><b>One change per message.</b>Small steps are easy to check and easy to undo.</li>
-          <li><b>Paste the exact error.</b>Copy the red text from the browser console and say what you expected to happen.</li>
-          <li><b>Make it explain.</b>Ask “what does this part do?” until you could explain it to a friend.</li>
-          <li><b>Check its work.</b>AI code has bugs and security holes. Click every button. Try weird inputs.</li>
-          <li><b>Never paste secrets.</b>No passwords, no API keys, no personal info. Everything on our data list is keyless anyway.</li>
+        <div class="compare">
+          <figure class="card try bad">
+            <figcaption>Vague prompt</figcaption>
+            <pre>Make a green app.</pre>
+            <div class="screen screen-bad" aria-label="A boring result">
+              <h4>Green App</h4>
+              <p>Welcome to Green App! Help save the planet by recycling and being eco-friendly.</p>
+              <button type="button" tabindex="-1">Learn More</button>
+            </div>
+          </figure>
+          <figure class="card try good">
+            <figcaption>Specific prompt</figcaption>
+            <pre>For runners in New York: show today’s air quality as one giant GO or WAIT sign, using the free Open-Meteo air API. Huge bold text. Works on a phone.</pre>
+            <div class="screen screen-good" aria-label="A clear, useful result">
+              <small>AIR CHECK · MIDTOWN</small>
+              <b id="mock-go">GO</b>
+              <span id="mock-aqi">Air quality 41 · good for a run</span>
+            </div>
+          </figure>
+        </div>
+        <ul class="rule-chips">
+          <li style="--c: var(--sdg-6)">One change per message</li>
+          <li style="--c: var(--sdg-11)">Paste the exact error</li>
+          <li style="--c: var(--sdg-15)">Ask it to explain</li>
+          <li style="--c: var(--sdg-10)">Click every button</li>
+          <li style="--c: var(--sdg-1)">Never paste secrets</li>
         </ul>
       </div>
     </section>
 
     <section class="section" id="win">
       <div class="wrap">
-        <div class="section-head">
-          <span class="eyebrow">How you win</span>
-          <h2>“Does it work?” is not the question. “Does it matter?” is.</h2>
-          <p>At the end you’ll show a live prototype, not a code file. Nobody is grading your syntax. We’re going to look at the screen and ask one thing:</p>
-        </div>
-        <blockquote class="quote">“If I stumbled across this on the internet, would I actually use it for more than 5 seconds?”</blockquote>
+        <span class="eyebrow">How you win</span>
+        <p class="quote">“If I stumbled across this on the internet, would I actually use it for more than 5 seconds?”</p>
       </div>
     </section>
 
@@ -251,18 +205,43 @@
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Why learn this now</span>
-          <h2>This is how real software gets built in 2026.</h2>
-          <p>You’re not learning a toy. Here’s what the industry looks like right now, and where it’s heading in 2027.</p>
+          <h2>This is how software gets built in 2026.</h2>
         </div>
         <div class="grid grid-4">
-          <div class="card stat"><span class="fig">66%</span><p>of developers use AI coding assistants or agents at work.</p><span class="src"><a href="https://stackoverflow.co/company/press/archive/stack-overflow-annual-developer-survey-ai-trust-conditional/" target="_blank" rel="noopener">Stack Overflow survey, Oct 2026</a></span></div>
-          <div class="card stat"><span class="fig">75%</span><p>of all new code at Google is generated by AI and approved by engineers.</p><span class="src"><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/cloud-next-2026-sundar-pichai/" target="_blank" rel="noopener">Sundar Pichai, Apr 2026</a></span></div>
-          <div class="card stat"><span class="fig">42% → 65%</span><p>of committed code is written or assisted by AI, by developers’ own estimate. They expect 65% by 2027.</p><span class="src"><a href="https://www.sonarsource.com/company/press-releases/sonar-data-reveals-critical-verification-gap-in-ai-coding/" target="_blank" rel="noopener">Sonar survey, Jan 2026</a></span></div>
-          <div class="card stat"><span class="fig">34%</span><p>of US workers shipping software with AI tools have no formal programming background.</p><span class="src"><a href="https://zapier.com/blog/building-business-software/" target="_blank" rel="noopener">Zapier survey, Jul 2026</a></span></div>
-          <div class="card stat"><span class="fig">96% / 48%</span><p>96% of developers don’t fully trust AI-written code, but only 48% always check it. Be someone who checks.</p><span class="src"><a href="https://www.sonarsource.com/company/press-releases/sonar-data-reveals-critical-verification-gap-in-ai-coding/" target="_blank" rel="noopener">Sonar survey, Jan 2026</a></span></div>
-          <div class="card stat"><span class="fig">+10%</span><p>projected growth in US software developer jobs from 2025 to 2035.</p><span class="src"><a href="https://data.bls.gov/projections/nationalMatrix?ioType=o&amp;queryParams=15-1252" target="_blank" rel="noopener">US Bureau of Labor Statistics</a></span></div>
-          <div class="card stat"><span class="fig">−20%</span><p>Jobs for software developers aged 22 to 25 have fallen nearly 20% since 2024. Entry-level work is changing fast.</p><span class="src"><a href="https://hai.stanford.edu/ai-index/2026-ai-index-report/economy" target="_blank" rel="noopener">Stanford AI Index 2026</a></span></div>
-          <div class="card stat unis"><span class="fig">92%</span><p>of code changes to UNIS’s own apps since August 2026 were made with an AI coding agent. That’s 15 apps and 334,656 lines of code, built in-house.</p><span class="src">UNIS GitHub, Oct 2026</span></div>
+          <div class="card stat"><span class="fig" data-count="66">66%</span><p>of developers use AI coding tools at work</p><span class="src"><a href="https://stackoverflow.co/company/press/archive/stack-overflow-annual-developer-survey-ai-trust-conditional/" target="_blank" rel="noopener">Stack Overflow, Oct 2026</a></span></div>
+          <div class="card stat"><span class="fig" data-count="75">75%</span><p>of new code at Google is written by AI, then checked by engineers</p><span class="src"><a href="https://blog.google/innovation-and-ai/infrastructure-and-cloud/google-cloud/cloud-next-2026-sundar-pichai/" target="_blank" rel="noopener">Sundar Pichai, Apr 2026</a></span></div>
+          <div class="card stat"><span class="fig" data-count="34">34%</span><p>of US workers building software with AI never studied programming</p><span class="src"><a href="https://zapier.com/blog/building-business-software/" target="_blank" rel="noopener">Zapier, Jul 2026</a></span></div>
+          <div class="card stat unis"><span class="fig" data-count="92">92%</span><p>of code changes to UNIS’s own 15 apps since August were made with an AI agent</p><span class="src">UNIS GitHub, Oct 2026</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="next">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">After today</span>
+          <h2>Keep building.</h2>
+        </div>
+        <div class="grid grid-3">
+          <article class="card event" style="--c: var(--sdg-17)">
+            <span class="event-tile"><b>Nov 14–15</b><small>Brooklyn · 2026</small></span>
+            <h3><a href="https://www.spaceappschallenge.org/2026/local-events/new-york/" target="_blank" rel="noopener">NASA Space Apps Challenge ↗</a></h3>
+            <span class="tags"><span>Hackathon</span><span>Free</span><span>Under 18: a parent registers you and comes along</span></span>
+          </article>
+          <article class="card event" style="--c: var(--sdg-4)">
+            <span class="event-tile"><b>College</b><small>Free · online</small></span>
+            <h3><a href="https://ai-4-all.org/" target="_blank" rel="noopener">AI4ALL Ignite ↗</a></h3>
+            <span class="tags"><span>Industry mentors</span><span>AI internships</span></span>
+            <a class="copy" href="https://ai4all.spcs.stanford.edu/" target="_blank" rel="noopener">In 9th grade? Stanford AI4ALL ↗</a>
+          </article>
+          <article class="card event" style="--c: var(--sdg-16)">
+            <span class="event-tile"><b>AI policy</b><small>Youth-led</small></span>
+            <h3><a href="https://encodeai.org/" target="_blank" rel="noopener">Encode ↗</a></h3>
+            <span class="tags"><span>Started by a 15-year-old</span><span>Helped pass New York’s AI safety law</span></span>
+          </article>
+        </div>
+        <div class="tool-links">
+          <a href="design.html#group-art">Make music, art and visuals with code <span>Strudel, p5.js, Hydra, CodePen →</span></a>
         </div>
       </div>
     </section>
@@ -270,8 +249,8 @@
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>Made for the UN Day software workshop at UNIS. Data belongs to each API’s provider.</span>
-      <span><a href="start.html">5-min setup</a> · <a href="apis.html">Live data</a> · <a href="design.html">Design kit</a> · <a href="https://github.com/unisny/UNDaySWE">Source on GitHub</a></span>
+      <span>Made for UN Day at UNIS. Data belongs to each API’s provider.</span>
+      <span><a href="start.html">5-min setup</a> · <a href="apis.html">Live data</a> · <a href="design.html">Design kit</a> · <a href="https://github.com/unisny/UNDaySWE">Source</a></span>
     </div>
   </footer>
 

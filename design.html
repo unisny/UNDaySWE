@@ -4,12 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Design Kit · UN Day</title>
-  <meta name="description" content="Free front-end resources for student apps: animation libraries, shadcn-style components, Google Fonts, icons, charts, maps, illustrations and color tools, each with a live demo and a sentence to tell your AI.">
+  <meta name="description" content="Free front-end resources for student apps: official SDG icons, fonts, animation libraries, components, icons, charts and maps, each with a live demo and a sentence to tell your AI.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@500;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@500;600;700&family=Space+Grotesk:wght@700&family=Fraunces:wght@800&family=DM+Serif+Display&family=Bebas+Neue&family=Caveat:wght@700&family=Press+Start+2P&family=Inter:wght@400;600&display=swap">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600&display=swap">
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@700&display=swap">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -32,17 +34,17 @@
       <div class="wrap">
         <span class="eyebrow">Make it look good · all free</span>
         <h1>Design <span class="mark">kit</span>.</h1>
-        <p class="lede">Animation libraries, shadcn-style components, fonts, icons, charts and color tools. Almost all of them work by pasting one line into your HTML file. Each card has the exact sentence to tell your AI, and <b>Try it live</b> runs a working demo you can copy.</p>
-        <div class="lanes-nav">
-          <a class="btn btn-sm" href="#sdg-brand">Official SDG icons</a>
-          <a class="btn btn-ghost btn-sm" href="#group-motion">Animation</a>
-          <a class="btn btn-ghost btn-sm" href="#group-ui">Components</a>
-          <a class="btn btn-ghost btn-sm" href="#group-type">Fonts &amp; icons</a>
-          <a class="btn btn-ghost btn-sm" href="#group-viz">Charts &amp; maps</a>
-          <a class="btn btn-ghost btn-sm" href="#group-look">Images &amp; color</a>
-          <a class="btn btn-ghost btn-sm" href="#sdg-colors">SDG colors</a>
-          <a class="btn btn-ghost btn-sm" href="#glow-up">Glow-up prompts</a>
-        </div>
+        <nav class="jump" aria-label="On this page">
+          <a class="btn btn-sm" href="#sdg-brand">SDG icons</a>
+          <a class="btn btn-sm btn-ghost" href="#fonts">Fonts</a>
+          <a class="btn btn-sm btn-ghost" href="#group-motion">Animation</a>
+          <a class="btn btn-sm btn-ghost" href="#group-ui">Components</a>
+          <a class="btn btn-sm btn-ghost" href="#group-icons">Icons</a>
+          <a class="btn btn-sm btn-ghost" href="#group-viz">Charts &amp; maps</a>
+          <a class="btn btn-sm btn-ghost" href="#group-art">Art &amp; music</a>
+          <a class="btn btn-sm btn-ghost" href="#sdg-colors">SDG colors</a>
+          <a class="btn btn-sm btn-ghost" href="#glow-up">Glow-up</a>
+        </nav>
       </div>
     </section>
 
@@ -50,68 +52,55 @@
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Start here · straight from the UN</span>
-          <h2>The real SDG icons, logo and color wheel.</h2>
-          <p>The UN gives out the official SDG icons, the SDG logo and color wheel, posters, and a pack for each goal with social media cards, a GIF and an infographic. Everything comes in all six UN languages, and anyone can use the icons and color wheel by following the UN’s guidelines.</p>
-          <div class="hero-actions">
-            <a class="btn" href="https://www.un.org/sustainabledevelopment/news/communications-material/" target="_blank" rel="noopener">Open the UN’s download page ↗</a>
-            <a class="btn btn-ghost" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2025/07/E-SDG-Icons-WEB.zip">17 icons for web (.zip)</a>
-            <a class="btn btn-ghost" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2025/07/E-SDG-logos-SDG-wheel_No-UN-Emblem.zip">Logo and wheel (.zip)</a>
-            <a class="btn btn-ghost" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2023/09/E_SDG_Guidelines_Sep20238.pdf" target="_blank" rel="noopener">Usage guidelines (PDF)</a>
-          </div>
+          <h2>The real SDG icons.</h2>
         </div>
-
-        <h3>Your goal’s pack</h3>
-        <p class="small muted">Social media cards, a GIF and an infographic for one goal. Each tile downloads a .zip from un.org.</p>
         <div class="goal-tiles" id="goal-packs"></div>
-
-        <div class="grid grid-2" style="margin-top: 28px">
-          <div class="callout info">
-            <h3>Do</h3>
-            <ul class="rules-list">
-              <li>Use the icons and color wheel to show which goal your app is about.</li>
-              <li>Use the versions <b>without</b> the UN emblem. The emblem versions are only for UN organizations.</li>
-              <li>Link to <a href="https://www.un.org/sustainabledevelopment" target="_blank" rel="noopener">un.org/sustainabledevelopment</a> and add the UN’s disclaimer line (below) to your app.</li>
-            </ul>
-          </div>
-          <div class="callout warn">
-            <h3>Don’t</h3>
-            <ul class="rules-list">
-              <li>Make it look like the UN made, approved or sponsors your app.</li>
-              <li>Build your own logo out of the wheel or the icons.</li>
-              <li>Use them to sell something or raise money. That needs the UN’s written permission.</li>
-            </ul>
-          </div>
+        <p class="note" style="margin-top: 10px">Tap a goal to download its pack: social cards, a GIF and an infographic.</p>
+        <div class="hero-actions">
+          <a class="btn btn-sm" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2025/07/E-SDG-Icons-WEB.zip">17 icons (.zip)</a>
+          <a class="btn btn-sm btn-ghost" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2025/07/E-SDG-logos-SDG-wheel_No-UN-Emblem.zip">Logo and wheel (.zip)</a>
+          <a class="btn btn-sm btn-ghost" href="https://www.un.org/sustainabledevelopment/wp-content/uploads/2023/09/E_SDG_Guidelines_Sep20238.pdf" target="_blank" rel="noopener">Usage rules (PDF)</a>
+          <a class="btn btn-sm btn-ghost" href="https://www.un.org/sustainabledevelopment/news/communications-material/" target="_blank" rel="noopener">All UN downloads ↗</a>
         </div>
-
-        <h3 style="margin-top: 28px">Paste this at the bottom of your app if you use the icons</h3>
+        <div class="dodont">
+          <ul class="do" aria-label="Do">
+            <li>Show which goal your app is about</li>
+            <li>Use the versions without the UN emblem</li>
+            <li>Paste the line below into your app</li>
+          </ul>
+          <ul class="dont" aria-label="Don’t">
+            <li>Make it look like the UN made or approved your app</li>
+            <li>Build your own logo out of the wheel or icons</li>
+            <li>Use them to sell something or raise money</li>
+          </ul>
+        </div>
         <div class="codeblock"><pre id="un-disclaimer">&lt;p&gt;The content of this publication has not been approved by the United Nations and does not reflect the views of the United Nations or its officials or Member States. &lt;a href="https://www.un.org/sustainabledevelopment"&gt;un.org/sustainabledevelopment&lt;/a&gt;&lt;/p&gt;</pre><button type="button" class="copy" data-copy="#un-disclaimer">Copy</button></div>
-        <p class="small muted" style="margin-top: 10px">Rules summarized from the UN’s <a href="https://www.un.org/sustainabledevelopment/news/communications-material/" target="_blank" rel="noopener">communications materials page</a> and FAQ, checked October 12, 2026. Read the guidelines if you’re unsure.</p>
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="fonts">
       <div class="wrap">
-        <ul class="rules">
-          <li><b>Two fonts, max.</b>One with personality for headings, one that’s easy to read for everything else.</li>
-          <li><b>One accent color.</b>Use it for the thing you want people to notice. Your SDG’s color is a great pick.</li>
-          <li><b>Motion should mean something.</b>Data arrived, you got it right, something changed. Wiggling for no reason just distracts.</li>
-          <li><b>“One HTML file” vs “Needs React”.</b>One-file tools work in Gemini Canvas and GitHub Pages with a single line. React tools need a React project.</li>
-        </ul>
+        <div class="section-head">
+          <span class="eyebrow">Fonts · Google Fonts and Fontshare</span>
+          <h2>Type your app’s name.</h2>
+        </div>
+        <label class="visually-hidden" for="font-text">Your text</label>
+        <input class="search font-input" id="font-text" value="While you slept, Earth shook 82 times." maxlength="80" spellcheck="false">
+        <div class="fonts" id="font-grid"></div>
       </div>
     </section>
 
     <section class="section">
       <div class="wrap" id="kit">
-        <noscript><p>Turn on JavaScript to see the design kit and try each library live.</p></noscript>
+        <noscript><p>Turn on JavaScript to see the live demos.</p></noscript>
       </div>
     </section>
 
     <section class="section" id="sdg-colors">
       <div class="wrap">
         <div class="section-head">
-          <span class="eyebrow">Built in</span>
-          <h2>The official SDG colors.</h2>
-          <p>Each goal has its own color. Use your goal’s color as your accent and your app instantly looks connected to it. Click one to copy its hex code.</p>
+          <span class="eyebrow">Official SDG colors</span>
+          <h2>Use your goal’s color. Click to copy.</h2>
         </div>
         <div class="palette" id="palette"></div>
       </div>
@@ -122,23 +111,33 @@
         <div class="section-head">
           <span class="eyebrow">Glow-up prompts</span>
           <h2>Make it look designed, one prompt at a time.</h2>
-          <p>Once your app works, send these one by one. Check the result after each one.</p>
         </div>
-        <ol class="flow glow">
-          <li><b>Fonts</b><span id="g1">Use the Google Fonts "Bricolage Grotesque" for headings and "Inter" for everything else, with a warm off-white background (#F6F3EA) and generous spacing.</span><button type="button" class="copy" data-copy="#g1">Copy</button></li>
-          <li><b>Color</b><span id="g2">Pick one accent color and use it everywhere it matters: the official SDG 13 green, #3F7E44.</span><button type="button" class="copy" data-copy="#g2">Copy</button></li>
-          <li><b>Loading</b><span id="g3">While the data loads, show grey placeholder boxes in the shape of the content instead of a blank screen.</span><button type="button" class="copy" data-copy="#g3">Copy</button></li>
-          <li><b>Motion</b><span id="g4">When the data arrives, animate the cards in one after another with GSAP from the jsDelivr CDN. Keep it under one second, and skip it for people who turned on “reduce motion”.</span><button type="button" class="copy" data-copy="#g4">Copy</button></li>
-          <li><b>Phone</b><span id="g5">Make it look great on a phone first, then on a laptop. Buttons should be big enough to tap.</span><button type="button" class="copy" data-copy="#g5">Copy</button></li>
-        </ol>
+        <div class="glow">
+          <div class="glow-side">
+            <ol class="glow-steps" id="glow-steps"></ol>
+            <div class="codeblock" hidden><pre id="glow-prompt"></pre><button type="button" class="copy" data-copy="#glow-prompt">Copy</button></div>
+          </div>
+          <div class="glow-stage">
+            <div class="glow-app" id="glow-app" aria-label="Example app">
+              <h4>Air <span>check</span></h4>
+              <p>Is it a good day for a run?</p>
+              <div class="gcards">
+                <div class="gcard"><span>Nairobi</span><b>38</b><span class="gtag">Good</span></div>
+                <div class="gcard"><span>New York</span><b>41</b><span class="gtag">Good</span></div>
+                <div class="gcard"><span>Oslo</span><b>22</b><span class="gtag">Good</span></div>
+                <div class="ghost"></div><div class="ghost"></div><div class="ghost"></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>Made for the UN Day software workshop at UNIS. Library versions checked October 12, 2026.</span>
-      <span><a href="./">Ideas</a> · <a href="start.html">5-min setup</a> · <a href="apis.html">Live data</a> · <a href="https://github.com/unisny/UNDaySWE">Source on GitHub</a></span>
+      <span>Made for UN Day at UNIS. Library versions checked October 12, 2026.</span>
+      <span><a href="./">Ideas</a> · <a href="start.html">5-min setup</a> · <a href="apis.html">Live data</a> · <a href="https://github.com/unisny/UNDaySWE">Source</a></span>
     </div>
   </footer>
 

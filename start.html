@@ -32,188 +32,191 @@
       <div class="wrap">
         <span class="eyebrow">Computer → code in under 5 minutes</span>
         <h1>Pick a lane.<br>Start <span class="mark">building</span>.</h1>
-        <p class="lede">Everyone can do Lane 1 with just a school Google login. Add Lane 2 to put your app on the internet. Lane 3 is for anyone who wants the setup real developers use.</p>
-        <div class="lanes-nav">
-          <a class="btn" href="#lane-1">Lane 1 · Build it now</a>
-          <a class="btn btn-ghost" href="#lane-2">Lane 2 · Put it online</a>
-          <a class="btn btn-ghost" href="#lane-3">Lane 3 · Pro setup</a>
-          <a class="btn btn-ghost" href="#tools">Which tools can I use?</a>
-        </div>
+        <nav class="lane-tabs" aria-label="Lanes">
+          <a class="lane-tab" href="#lane-1" style="--c: var(--sdg-7)"><b>1</b><span>Build it now</span><small>3 min · no new accounts</small></a>
+          <a class="lane-tab" href="#lane-2" style="--c: var(--sdg-6)"><b>2</b><span>Put it online</span><small>5 min · GitHub, 13+</small></a>
+          <a class="lane-tab" href="#lane-3" style="--c: var(--sdg-15)"><b>3</b><span>Pro setup</span><small>10 min · needs Lane 2</small></a>
+        </nav>
       </div>
     </section>
 
-    <section class="section" id="lane-1">
+    <section class="section lane" id="lane-1" style="--c: var(--sdg-7)">
       <div class="wrap">
         <div class="lane-head">
           <h2>Lane 1 · Build it now</h2>
-          <span class="pill go">About 3 minutes</span>
-          <span class="pill">No new accounts</span>
+          <span class="progress" aria-hidden="true"><i></i></span><span class="progress-count"></span>
         </div>
-        <p class="muted">You’ll use Gemini’s Canvas, which writes your app and runs it right next to the chat. Tick steps off as you go; this page remembers.</p>
-
         <ol class="steps">
           <li class="step">
             <input type="checkbox" data-save="l1-1" aria-label="Done: open Gemini">
             <div>
-              <h3>Open Gemini with your school account <span class="t">0:30</span></h3>
-              <p>Go to <a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com</a> and sign in with your <b>school</b> Google account.</p>
+              <h3>Open Gemini with your school account</h3>
+              <div class="path"><a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com ↗</a></div>
             </div>
           </li>
           <li class="step">
-            <input type="checkbox" data-save="l1-2" aria-label="Done: turn on Canvas">
+            <input type="checkbox" data-save="l1-2" aria-label="Done: turn on Gemini Canvas">
             <div>
-              <h3>Turn on Canvas <span class="t">0:15</span></h3>
-              <p>In the message box, open <b>Tools</b> and pick <b>Canvas</b>. That’s the mode that builds apps you can see and click.</p>
+              <h3>Turn on Gemini Canvas</h3>
+              <div class="path"><b>Tools</b><b>Canvas</b></div>
+              <figure class="mock-canvas" aria-label="Gemini Canvas: your chat on the left, your app running on the right">
+                <div class="mc-chat">
+                  <span class="mc-label">Chat</span>
+                  <q>Make a yellow website…</q>
+                  <i></i><i></i>
+                </div>
+                <div class="mc-app">
+                  <div class="mc-tabs">
+                    <button type="button" data-view="code" aria-pressed="false">Code</button>
+                    <button type="button" data-view="preview" aria-pressed="true">Preview</button>
+                  </div>
+                  <div class="mc-preview">Agentic Workshop</div>
+                  <pre class="mc-code" hidden>&lt;style&gt;
+  body { background: yellow; }
+&lt;/style&gt;
+&lt;h1&gt;Agentic Workshop&lt;/h1&gt;</pre>
+                </div>
+              </figure>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l1-3" aria-label="Done: warm-up prompt">
             <div>
-              <h3>Warm up with the instructor’s demo <span class="t">1:00</span></h3>
-              <p>Paste this, send it, then click <b>Preview</b>. You just built a website.</p>
+              <h3>Warm up: paste this, then press Preview</h3>
               <div class="codeblock"><pre id="warmup">Make a yellow website with a header that says "Agentic Workshop".</pre><button type="button" class="copy" data-copy="#warmup">Copy</button></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l1-4" aria-label="Done: real prompt">
             <div>
-              <h3>Paste your real starter prompt <span class="t">1:00</span></h3>
-              <p>Grab one from the <a href="./#sparks">four questions</a>, build your own with the <a href="./#pitch">pitch builder</a>, or press <b>Copy starter prompt</b> on any card in <a href="apis.html">Live data</a>. Your app will pull real data on its first try.</p>
+              <h3>Paste your real starter prompt</h3>
+              <div class="path or"><a href="./#sparks">Four questions</a><a href="./#pitch">Pitch builder</a><a href="apis.html">Live data</a></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l1-5" aria-label="Done: first change">
             <div>
-              <h3>Make it yours, one change at a time</h3>
-              <p>Ask for one thing per message: “Make the headline huge.” “Add a map.” “Use the SDG 13 green, #3F7E44.” For fonts, animations and icons, grab a sentence from the <a href="design.html">Design kit</a>. If something breaks, see <a href="#trouble">When it breaks</a>.</p>
+              <h3>Make it yours, one change per message</h3>
+              <div class="says"><q>Make the headline huge.</q><q>Add a map.</q><q>Use the SDG 13 green, #3F7E44.</q><q>Use the font Fraunces.</q></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l1-6" aria-label="Done: share">
             <div>
-              <h3>Share it</h3>
-              <p>Use <b>Share</b> in Canvas to get a link. If your school limits sharing, do Lane 2 to give it a real web address.</p>
+              <h3>Share it with a link</h3>
+              <div class="path"><b>Share</b></div>
             </div>
           </li>
         </ol>
-
-        <div class="callout info" style="margin-top: 20px">
-          <p><b>Gemini isn’t turned on for your account?</b> Use <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a> instead: its Canvas can also run HTML apps. ChatGPT is for ages 13+, and if you’re under 18 you need a parent’s or guardian’s permission. If neither works, pair up with a classmate. Two people on one app is how real teams work anyway.</p>
-        </div>
+        <p class="note">No Gemini? Use <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a> Canvas (13+, parent’s permission under 18), or pair up with a classmate.</p>
       </div>
     </section>
 
-    <section class="section" id="lane-2">
+    <section class="section lane" id="lane-2" style="--c: var(--sdg-6)">
       <div class="wrap">
         <div class="lane-head">
-          <h2>Lane 2 · Put it on the internet</h2>
-          <span class="pill go">About 5 minutes</span>
-          <span class="pill">GitHub account, age 13+</span>
+          <h2>Lane 2 · Put it online</h2>
+          <span class="progress" aria-hidden="true"><i></i></span><span class="progress-count"></span>
         </div>
-        <p class="muted">GitHub is where developers keep their code, work in teams and publish websites. GitHub Pages turns your file into a real link anyone can open.</p>
-
         <ol class="steps">
           <li class="step">
             <input type="checkbox" data-save="l2-1" aria-label="Done: GitHub account">
             <div>
-              <h3>Make a free GitHub account <span class="t">2:00</span></h3>
-              <p>Sign up at <a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup</a> with an email you can check right now, then enter the code GitHub emails you. Pick a username you’d be happy to show a future employer.</p>
+              <h3>Make a free GitHub account</h3>
+              <div class="path"><a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup ↗</a></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l2-2" aria-label="Done: new repository">
             <div>
-              <h3>Create a repository <span class="t">0:30</span></h3>
-              <p>Click <b>+</b> (top right) → <b>New repository</b>. Name it after your app (like <code>birthday-heat</code>), choose <b>Public</b>, tick <b>Add a README file</b>, then <b>Create repository</b>.</p>
+              <h3>Create a repository</h3>
+              <div class="path"><b>+</b><b>New repository</b><b>Public</b><b>Add a README</b><b>Create repository</b></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l2-3" aria-label="Done: add index.html">
             <div>
-              <h3>Add your app <span class="t">1:00</span></h3>
-              <p>In Canvas, switch to the <b>Code</b> view and copy everything. On GitHub: <b>Add file</b> → <b>Create new file</b>, name it exactly <code>index.html</code>, paste, then <b>Commit changes</b>.</p>
+              <h3>Paste your app’s code from Canvas</h3>
+              <div class="path"><b>Add file</b><b>Create new file</b><code>index.html</code><b>Commit changes</b></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l2-4" aria-label="Done: turn on Pages">
             <div>
-              <h3>Turn on GitHub Pages <span class="t">0:30</span></h3>
-              <p><b>Settings</b> → <b>Pages</b>. Under <i>Build and deployment</i>, set Source to <b>Deploy from a branch</b>, pick <b>main</b> and <b>/ (root)</b>, then <b>Save</b>.</p>
+              <h3>Turn on GitHub Pages</h3>
+              <div class="path"><b>Settings</b><b>Pages</b><b>Deploy from a branch</b><b>main · / (root)</b><b>Save</b></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l2-5" aria-label="Done: open link">
             <div>
-              <h3>Open your link <span class="t">1:00</span></h3>
-              <p>Wait about a minute and refresh the Pages screen. Your app is live at <code>https://YOUR-USERNAME.github.io/REPO-NAME/</code>. Text it to someone.</p>
+              <h3>Wait a minute, then open your link</h3>
+              <div class="url-build">
+                https://<input id="gh-user" placeholder="your-username" aria-label="Your GitHub username" spellcheck="false">.github.io/<input id="gh-repo" placeholder="repo-name" aria-label="Your repository name" spellcheck="false">/
+                <a class="copy" id="gh-open" href="#" target="_blank" rel="noopener" hidden>Open ↗</a>
+              </div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l2-6" aria-label="Done: teammates">
             <div>
-              <h3>Working in a team? Add your teammates</h3>
-              <p><b>Settings</b> → <b>Collaborators</b> → <b>Add people</b>. To update the app later, open <code>index.html</code>, click the pencil, paste the new version and commit. The site updates in about a minute, and GitHub keeps every old version in case you need to go back.</p>
+              <h3>Working in a team? Add teammates</h3>
+              <div class="path"><b>Settings</b><b>Collaborators</b><b>Add people</b></div>
             </div>
           </li>
         </ol>
-
-        <div class="callout" style="margin-top: 20px">
-          <p><b>Other ways to publish:</b> <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">Netlify Drop</a> (13+) lets you drag a folder with your <code>index.html</code> onto the page. To keep the site, claim it with a free Netlify account within about an hour. <a href="https://vercel.com/new" target="_blank" rel="noopener">Vercel</a> (16+) connects to your GitHub repo and republishes automatically every time you commit.</p>
-        </div>
+        <p class="note">Other ways to publish: <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">Netlify Drop</a> (13+, drag and drop) · <a href="https://vercel.com/new" target="_blank" rel="noopener">Vercel</a> (16+)</p>
       </div>
     </section>
 
-    <section class="section" id="lane-3">
+    <section class="section lane" id="lane-3" style="--c: var(--sdg-15)">
       <div class="wrap">
         <div class="lane-head">
-          <h2>Lane 3 · The pro setup</h2>
-          <span class="pill">About 10 minutes</span>
-          <span class="pill">Needs Lane 2’s GitHub repo</span>
+          <h2>Lane 3 · Pro setup</h2>
+          <span class="progress" aria-hidden="true"><i></i></span><span class="progress-count"></span>
         </div>
-        <p class="muted">A full code editor in your browser with an AI agent that can read, write and fix your files. This is close to how professional developers work.</p>
-
         <ol class="steps">
           <li class="step">
             <input type="checkbox" data-save="l3-1" aria-label="Done: open Codespace">
             <div>
-              <h3>Open a Codespace <span class="t">2:00</span></h3>
-              <p>In your repo, click the green <b>Code</b> button → <b>Codespaces</b> → <b>Create codespace on main</b>. VS Code opens in your browser. Free accounts get 120 core-hours a month, which is about 60 hours on the standard machine.</p>
+              <h3>Open a Codespace on your repo</h3>
+              <div class="path"><b>Code</b><b>Codespaces</b><b>Create codespace on main</b></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l3-2" aria-label="Done: Copilot agent">
             <div>
-              <h3>Open Copilot in Agent mode <span class="t">1:00</span></h3>
-              <p>Open the chat panel (the Copilot icon at the top, or <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>I</kbd>; <kbd>Ctrl</kbd>+<kbd>Cmd</kbd>+<kbd>I</kbd> on a Mac) and switch the mode to <b>Agent</b>. Copilot Free comes with every GitHub account and has a monthly usage limit.</p>
+              <h3>Open Copilot in Agent mode</h3>
+              <div class="path"><b><kbd>Ctrl</kbd>&nbsp;<kbd>Alt</kbd>&nbsp;<kbd>I</kbd>&nbsp;(Mac:&nbsp;<kbd>Ctrl</kbd>&nbsp;<kbd>Cmd</kbd>&nbsp;<kbd>I</kbd>)</b><b>Agent</b></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l3-3" aria-label="Done: build">
             <div>
-              <h3>Give it your starter prompt <span class="t">3:00</span></h3>
-              <p>Paste your prompt. The agent edits <code>index.html</code> for you. Read each change before you click <b>Keep</b>, because you’re the architect.</p>
+              <h3>Paste your prompt. Read each change before you keep it</h3>
+              <div class="path"><b>Keep</b></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l3-4" aria-label="Done: preview">
             <div>
-              <h3>Preview it <span class="t">1:00</span></h3>
-              <p>Open the terminal (<kbd>Ctrl</kbd>+<kbd>`</kbd>) and run the line below, then click <b>Open in Browser</b> when it pops up.</p>
+              <h3>Preview it in the terminal (<kbd>Ctrl</kbd>&nbsp;<kbd>`</kbd>)</h3>
               <div class="codeblock"><pre id="serve">python3 -m http.server 8000</pre><button type="button" class="copy" data-copy="#serve">Copy</button></div>
+              <div class="path" style="margin-top: 10px"><b>Open in Browser</b></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l3-5" aria-label="Done: commit">
             <div>
-              <h3>Commit and publish <span class="t">1:00</span></h3>
-              <p>Open the <b>Source Control</b> panel, write a short message about what changed, then click <b>Commit</b> and <b>Sync</b>. If you turned on Pages in Lane 2, your live site updates in about a minute.</p>
+              <h3>Commit and publish</h3>
+              <div class="path"><b>Source Control</b><b>Commit</b><b>Sync</b></div>
             </div>
           </li>
           <li class="step">
             <input type="checkbox" data-save="l3-6" aria-label="Done: apply for Education">
             <div>
-              <h3>After today: get the student pack</h3>
-              <p>Apply for <a href="https://education.github.com/pack" target="_blank" rel="noopener">GitHub Education</a> with your school email or student ID (13+). Approval can take a few days. Then you get Copilot Student for free, plus extra Codespaces hours.</p>
+              <h3>After today: free Copilot Student (13+)</h3>
+              <div class="path"><a href="https://education.github.com/pack" target="_blank" rel="noopener">education.github.com/pack ↗</a></div>
             </div>
           </li>
         </ol>
@@ -224,81 +227,23 @@
       <div class="wrap">
         <div class="section-head">
           <span class="eyebrow">Which tools can I use?</span>
-          <h2>Free AI coding tools, sorted by age.</h2>
-          <p>Lots of the AI coding tools you hear about are for adults only. Here’s what each tool’s own terms say, checked on October 12, 2026. Rules change often, so check again before signing up.</p>
+          <h2>AI coding tools, by age.</h2>
         </div>
-
-        <table class="tools">
-          <thead>
-            <tr><th>Tool</th><th>What it’s for</th><th>Minimum age</th><th>Cost</th><th>Today</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Gemini <span>with your school account</span></td>
-              <td data-label="What it’s for">AI chat that builds and previews apps in Canvas</td>
-              <td data-label="Minimum age"><span class="age ok">School accounts</span><br><span class="small muted">if your school turns it on; 13+ on personal accounts</span></td>
-              <td data-label="Cost">Free</td>
-              <td data-label="Today"><b>Lane 1</b></td>
-            </tr>
-            <tr>
-              <td>ChatGPT</td>
-              <td data-label="What it’s for">AI chat. Canvas runs HTML and React apps</td>
-              <td data-label="Minimum age"><span class="age ok">13+</span><br><span class="small muted">under 18 needs parent or guardian permission</span></td>
-              <td data-label="Cost">Free plan</td>
-              <td data-label="Today">Backup</td>
-            </tr>
-            <tr>
-              <td>GitHub <span>+ GitHub Pages</span></td>
-              <td data-label="What it’s for">Store code, work as a team, publish websites</td>
-              <td data-label="Minimum age"><span class="age ok">13+</span></td>
-              <td data-label="Cost">Free</td>
-              <td data-label="Today"><b>Lane 2</b></td>
-            </tr>
-            <tr>
-              <td>Codespaces + Copilot Free</td>
-              <td data-label="What it’s for">VS Code in your browser, with an AI agent</td>
-              <td data-label="Minimum age"><span class="age ok">13+</span></td>
-              <td data-label="Cost">Free monthly allowance</td>
-              <td data-label="Today"><b>Lane 3</b></td>
-            </tr>
-            <tr>
-              <td>GitHub Education</td>
-              <td data-label="What it’s for">Student Developer Pack, including Copilot Student</td>
-              <td data-label="Minimum age"><span class="age ok">13+</span><br><span class="small muted">students, with school verification</span></td>
-              <td data-label="Cost">Free</td>
-              <td data-label="Today">Apply after</td>
-            </tr>
-            <tr>
-              <td>Netlify</td>
-              <td data-label="What it’s for">Drag-and-drop website hosting</td>
-              <td data-label="Minimum age"><span class="age ok">13+</span></td>
-              <td data-label="Cost">Free plan</td>
-              <td data-label="Today">Option</td>
-            </tr>
-            <tr>
-              <td>Vercel</td>
-              <td data-label="What it’s for">Hosting that republishes on every commit</td>
-              <td data-label="Minimum age"><span class="age">16+</span></td>
-              <td data-label="Cost">Free Hobby plan</td>
-              <td data-label="Today">If you’re 16+</td>
-            </tr>
-            <tr>
-              <td>Claude <span>and Claude Code</span></td>
-              <td data-label="What it’s for">What your instructor demos: an agent that writes, runs and fixes code on its own</td>
-              <td data-label="Minimum age"><span class="age no">18+</span></td>
-              <td data-label="Cost">Claude Code needs a paid plan</td>
-              <td data-label="Today">Watch the demo</td>
-            </tr>
-            <tr>
-              <td>Cursor, Bolt.new, Google AI Studio</td>
-              <td data-label="What it’s for">Popular AI coding tools</td>
-              <td data-label="Minimum age"><span class="age no">18+</span></td>
-              <td data-label="Cost">Free tiers</td>
-              <td data-label="Today">Not yet</td>
-            </tr>
-          </tbody>
-        </table>
-        <p class="small muted" style="margin-top: 14px">Sources: <a href="https://support.google.com/a/answer/14571493" target="_blank" rel="noopener">Gemini for Education</a> · <a href="https://openai.com/policies/terms-of-use/" target="_blank" rel="noopener">OpenAI terms</a> · <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" target="_blank" rel="noopener">GitHub terms</a> · <a href="https://docs.github.com/en/copilot/get-started/plans" target="_blank" rel="noopener">Copilot plans</a> · <a href="https://www.netlify.com/legal/terms-of-use/" target="_blank" rel="noopener">Netlify terms</a> · <a href="https://vercel.com/legal/terms" target="_blank" rel="noopener">Vercel terms</a> · <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">Anthropic terms</a> · <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a> · <a href="https://cursor.com/terms-of-service" target="_blank" rel="noopener">Cursor terms</a> · <a href="https://stackblitz.com/terms-of-service" target="_blank" rel="noopener">Bolt terms</a> · <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Google AI Studio terms</a></p>
+        <ul class="tool-grid">
+          <li class="tool"><b>Gemini</b><span class="age ok">School account</span><small>Lane 1</small></li>
+          <li class="tool"><b>ChatGPT</b><span class="age ok">13+</span><small>Backup · parent’s OK under 18</small></li>
+          <li class="tool"><b>GitHub + Pages</b><span class="age ok">13+</span><small>Lane 2</small></li>
+          <li class="tool"><b>Codespaces + Copilot Free</b><span class="age ok">13+</span><small>Lane 3</small></li>
+          <li class="tool"><b>GitHub Education</b><span class="age ok">13+</span><small>Apply after today</small></li>
+          <li class="tool"><b>Netlify</b><span class="age ok">13+</span><small>Hosting</small></li>
+          <li class="tool"><b>Vercel</b><span class="age">16+</span><small>Hosting</small></li>
+          <li class="tool"><b>Claude &amp; Claude Code</b><span class="age no">18+</span><small>Watch the instructor demo</small></li>
+          <li class="tool"><b>Cursor, Bolt.new, AI Studio</b><span class="age no">18+</span><small>Not yet</small></li>
+        </ul>
+        <details class="sources">
+          <summary>Sources · checked October 12, 2026</summary>
+          <p><a href="https://support.google.com/a/answer/14571493" target="_blank" rel="noopener">Gemini for Education</a> · <a href="https://openai.com/policies/terms-of-use/" target="_blank" rel="noopener">OpenAI terms</a> · <a href="https://docs.github.com/en/site-policy/github-terms/github-terms-of-service" target="_blank" rel="noopener">GitHub terms</a> · <a href="https://docs.github.com/en/copilot/get-started/plans" target="_blank" rel="noopener">Copilot plans</a> · <a href="https://www.netlify.com/legal/terms-of-use/" target="_blank" rel="noopener">Netlify terms</a> · <a href="https://vercel.com/legal/terms" target="_blank" rel="noopener">Vercel terms</a> · <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank" rel="noopener">Anthropic terms</a> · <a href="https://claude.com/pricing" target="_blank" rel="noopener">Claude pricing</a> · <a href="https://cursor.com/terms-of-service" target="_blank" rel="noopener">Cursor terms</a> · <a href="https://stackblitz.com/terms-of-service" target="_blank" rel="noopener">Bolt terms</a> · <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Google AI Studio terms</a></p>
+        </details>
       </div>
     </section>
 
@@ -307,54 +252,47 @@
         <div class="section-head">
           <span class="eyebrow">When it breaks</span>
           <h2>It will break. That’s normal.</h2>
-          <p>Professional developers spend a lot of their day on exactly these problems.</p>
         </div>
         <div class="trouble">
           <details>
             <summary>My page is blank</summary>
-            <p>Open the browser console: <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>J</kbd> on a Mac, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>J</kbd> on Windows or a Chromebook. Copy the red error and send it to your AI with: “I got this error. Fix it and explain what was wrong.”</p>
+            <p>Open the console (<kbd>Cmd</kbd>&nbsp;<kbd>Option</kbd>&nbsp;<kbd>J</kbd> on a Mac, <kbd>Ctrl</kbd>&nbsp;<kbd>Shift</kbd>&nbsp;<kbd>J</kbd> elsewhere), copy the red error, and send it with:</p>
+            <div class="codeblock"><pre id="fix-prompt">I got this error. Fix it and explain what was wrong:</pre><button type="button" class="copy" data-copy="#fix-prompt">Copy</button></div>
           </details>
           <details>
-            <summary>It says “blocked by CORS policy”</summary>
-            <p>That API doesn’t allow web pages to call it. Pick one from <a href="apis.html">Live data</a> instead: every API there was tested in a browser.</p>
+            <summary><code class="err">Access to fetch … has been blocked by CORS policy</code></summary>
+            <p>That API doesn’t let web pages call it. Every API in <a href="apis.html">Live data</a> does.</p>
           </details>
           <details>
-            <summary>It says “mixed content”, or nothing loads on my live site</summary>
-            <p>Your app is calling an <code>http://</code> address. Websites served over https can only fetch https URLs, so change it to <code>https://</code> or pick another API.</p>
+            <summary><code class="err">Mixed Content: … requested an insecure resource 'http://…'</code></summary>
+            <p>Change <code>http://</code> to <code>https://</code>, or pick another API.</p>
           </details>
           <details>
             <summary>The AI keeps asking for an API key</summary>
-            <p>Tell it: “This API needs no key. Don’t add one.” Never paste a real key into a public app.</p>
+            <p>Tell it: “This API needs no key. Don’t add one.”</p>
           </details>
           <details>
             <summary>Every fix makes it worse</summary>
-            <p>Stop and go back to the last version that worked: Canvas keeps a version history, and GitHub keeps every commit. Then ask for one small change at a time.</p>
+            <p>Go back to the last version that worked (Canvas and GitHub both keep history), then ask for one small change.</p>
           </details>
           <details>
-            <summary>The data looks weird</summary>
-            <p>Ask: “Log the first item with console.log and explain each field in plain English.” Then tell the AI which fields you actually want.</p>
-          </details>
-          <details>
-            <summary>My GitHub Pages link shows 404</summary>
-            <p>Give it a minute. Check that the file is named exactly <code>index.html</code> (lowercase), sits in the top folder of the repo, and that <b>Settings → Pages</b> says your site is live.</p>
+            <summary><code class="err">404 · There isn’t a GitHub Pages site here.</code></summary>
+            <p>Wait a minute. The file must be named <code>index.html</code> and sit in the top folder of the repo.</p>
           </details>
         </div>
-
-        <div class="callout warn" style="margin-top: 24px">
-          <h3>Stay safe</h3>
-          <p>Never put passwords, API keys or personal details (yours or anyone else’s) into an AI chat or into your code. Public repos and websites can be seen by anyone. And if any site asks for a credit card, stop: nothing today costs money.</p>
-        </div>
+        <p class="safe">Never paste passwords, API keys or personal info into an AI or your code. Nothing today costs money: if a site asks for a card, stop.</p>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <span>Made for the UN Day software workshop at UNIS. Tool rules checked October 12, 2026.</span>
-      <span><a href="./">Ideas</a> · <a href="apis.html">Live data</a> · <a href="design.html">Design kit</a> · <a href="https://github.com/unisny/UNDaySWE">Source on GitHub</a></span>
+      <span>Made for UN Day at UNIS. Tool rules checked October 12, 2026.</span>
+      <span><a href="./">Ideas</a> · <a href="apis.html">Live data</a> · <a href="design.html">Design kit</a> · <a href="https://github.com/unisny/UNDaySWE">Source</a></span>
     </div>
   </footer>
 
   <script src="assets/site.js"></script>
+  <script src="assets/start.js"></script>
 </body>
 </html>
