@@ -1,6 +1,7 @@
 // 5-minute setup: the three lanes work as tabs, each lane shows how many of its
 // steps are ticked off, and Lane 2 builds your GitHub Pages link as you type.
 (() => {
+  if (location.hash === '#ship') location.replace('ship.html'); // Ship used to live on this page
   const { store } = window.UND;
   const lanes = [...document.querySelectorAll('.lane')];
   const tabs = [...document.querySelectorAll('.lane-tab')];
@@ -13,7 +14,7 @@
   }
 
   // Show the lane a link points to, then scroll to its target: hiding the other
-  // lanes moves everything below them (like #ship), so the browser's own jump misses.
+  // lanes moves everything below them (like #tools), so the browser's own jump misses.
   function follow(id, behavior) {
     showLane(id);
     document.getElementById(id)?.scrollIntoView({ behavior });

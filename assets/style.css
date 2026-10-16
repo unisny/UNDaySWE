@@ -378,16 +378,9 @@ details[open] > summary::before { content: "–"; }
 .url-build input { font: inherit; width: 14ch; padding: 3px 6px; border: 1.5px dashed var(--line-2); border-radius: 6px; background: var(--card); color: var(--ink); }
 .url-build a { margin-left: auto; }
 
-.ages { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
-.ages li { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: 8px 14px; align-items: center; padding: 12px 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
-@media (max-width: 600px) { .ages li { grid-template-columns: minmax(0, 1fr); } }
-.age { justify-self: start; display: inline-block; font: 800 .78rem/1 var(--font-mono); padding: 5px 8px; border-radius: 6px; background: var(--code-bg); }
-.age.ok { background: color-mix(in srgb, var(--ok) 20%, var(--card)); color: var(--ok); }
-.age.no { background: color-mix(in srgb, var(--bad) 16%, var(--card)); color: var(--bad); }
-.sources { margin-top: 16px; font-size: .86rem; color: var(--muted); }
-.sources summary { font-weight: 600; }
-.sources p { margin: 8px 0 0; }
-.sources a { color: inherit; }
+.tools { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+.tools li { display: grid; gap: 2px; padding: 12px 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+.tools b { color: var(--ink); font: 700 1.05rem/1.25 var(--font-display); }
 
 .trouble { display: grid; gap: 10px; }
 .trouble details { padding: 14px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
@@ -557,12 +550,19 @@ code.err { color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, var
 
 .has-cursor, .has-cursor * { cursor: none !important; }
 .has-cursor :is(input:not([type="checkbox"]), textarea) { cursor: text !important; }
-.cursor-dot, .cursor-ring, .cursor-spark { position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none; }
-.cursor-dot { width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 2px var(--paper); }
-.cursor-ring { width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%; border: 2.5px solid var(--c, var(--sdg-7)); transition: scale .2s ease, background-color .2s ease, border-color .4s ease, opacity .2s ease; }
-.cursor-hover .cursor-ring { scale: 1.5; background: color-mix(in srgb, var(--c, var(--sdg-7)) 22%, transparent); }
-.has-cursor .cursor-ring.press { scale: .7; }
-.cursor-off .cursor-dot, .cursor-off .cursor-ring { opacity: 0; }
+.cursor-plane, .cursor-trail, .cursor-spark { position: fixed; left: 0; top: 0; z-index: 1000; pointer-events: none; }
+/* The plane's nose (30, 16 in its 32px box) sits on the pointer, and it turns and grows around that point. */
+.cursor-plane { width: 32px; height: 32px; margin: -16px 0 0 -30px; transform-origin: 30px 16px; transition: scale .2s ease; filter: drop-shadow(0 2px 2px rgb(0 0 0 / .25)); }
+.cursor-plane svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.cursor-plane path { stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: round; transition: fill .3s ease; }
+.cursor-plane .wing { fill: var(--card); }
+.cursor-plane .wing-low { fill: var(--c, var(--sdg-7)); }
+.cursor-plane .keel { fill: color-mix(in srgb, var(--ink) 35%, var(--c, var(--sdg-7))); }
+.cursor-hover .cursor-plane { scale: 1.3; }
+.cursor-hover .cursor-plane .wing { fill: color-mix(in srgb, var(--c, var(--sdg-7)) 30%, var(--card)); }
+.has-cursor .cursor-plane.press { scale: .85; }
+.cursor-trail { z-index: 999; width: var(--s); height: var(--s); margin: calc(var(--s) / -2) 0 0 calc(var(--s) / -2); border-radius: 50%; background: var(--c); opacity: 0; }
+.cursor-off :is(.cursor-plane, .cursor-trail) { visibility: hidden; }
 .cursor-spark { width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 2px; background: var(--c); animation: spark .7s cubic-bezier(.15, .8, .3, 1) forwards; }
 @keyframes spark {
   60% { opacity: 1; }

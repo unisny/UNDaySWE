@@ -123,36 +123,67 @@
   // Grey placeholder bars shown while a live preview loads.
   const SKELETON = '<div class="skeleton" aria-label="Loading live data"><i></i><i></i><i></i></div>';
 
-  // A custom cursor for mouse users: a dot, plus a ring that trails behind it and
-  // cycles through the 17 SDG colors as you move. It grows over anything clickable,
-  // pops SDG confetti on click, and steps aside for text fields and embedded demos.
-  // Touch screens and "reduce motion" keep the normal cursor.
+  // A custom cursor for mouse users: a paper plane whose nose is the pointer. It turns to
+  // face the way you move and leaves a trail of SDG colors, then settles back into the
+  // usual arrow pose when you stop. It grows over anything clickable, pops SDG confetti
+  // on click, and steps aside for text fields and embedded demos. Touch screens and
+  // "reduce motion" keep the normal cursor.
+  const PLANE = '<svg viewBox="0 0 32 32" aria-hidden="true"><path class="wing" d="M30 16 2 4.5 9 16Z"/>'
+    + '<path class="wing-low" d="M30 16H9L2 27.5Z"/><path class="keel" d="M30 16H9l4 5Z"/></svg>';
+  const REST = -135; // nose up and to the left, like the usual arrow
+
   function mountCursor() {
     const root = document.documentElement;
-    const dot = Object.assign(document.createElement('div'), { className: 'cursor-dot' });
-    const ring = Object.assign(document.createElement('div'), { className: 'cursor-ring' });
-    document.body.append(ring, dot);
+    const plane = Object.assign(document.createElement('div'), { className: 'cursor-plane', innerHTML: PLANE });
+    const trail = Array.from({ length: 8 }, (_, i) => {
+      const el = Object.assign(document.createElement('i'), { className: 'cursor-trail' });
+      el.style.cssText = `--c: var(--sdg-${((i * 2) % 17) + 1}); --s: ${7 - i * 0.5}px`;
+      return { el, x: 0, y: 0 };
+    });
+    document.body.append(...trail.map((dot) => dot.el), plane);
     root.classList.add('has-cursor', 'cursor-off');
 
     const CLICKABLE = 'a, button, summary, label, select, input[type="checkbox"]';
     const TEXT = 'input:not([type="checkbox"]), textarea';
-    let x = 0, y = 0, ringX = 0, ringY = 0, travelled = 0, frame = 0, over = null;
+    let x = 0, y = 0, vx = 0, vy = 0, travelled = 0, over = null;
+    let angle = REST, heading = REST, lastMove = 0, frame = 0;
+    const turnBy = () => ((((heading - angle + 180) % 360) + 360) % 360) - 180; // degrees still to turn, the short way round
 
-    function trail() {
-      ringX += (x - ringX) * 0.22;
-      ringY += (y - ringY) * 0.22;
-      ring.style.translate = `${ringX}px ${ringY}px`; // not transform, or the CSS hover scale would scale this offset too
-      frame = Math.abs(x - ringX) + Math.abs(y - ringY) > 0.3 ? requestAnimationFrame(trail) : 0;
+    function fly(now) {
+      const resting = now - lastMove > 400;
+      if (resting) heading = REST;
+      angle += turnBy() * (resting ? 0.1 : 0.25);
+      plane.style.rotate = `${angle}deg`;
+      let busy = !resting || Math.abs(turnBy()) > 0.5;
+      let lead = { x, y };
+      for (const dot of trail) {
+        dot.x += (lead.x - dot.x) * 0.45;
+        dot.y += (lead.y - dot.y) * 0.45;
+        dot.el.style.translate = `${dot.x}px ${dot.y}px`;
+        dot.el.style.opacity = Math.min(1, Math.hypot(x - dot.x, y - dot.y) / 24); // hidden once it catches up
+        busy ||= Math.abs(lead.x - dot.x) + Math.abs(lead.y - dot.y) > 0.3;
+        lead = dot;
+      }
+      frame = busy ? requestAnimationFrame(fly) : 0;
     }
 
     document.addEventListener('pointermove', (e) => {
       if (e.pointerType !== 'mouse') return;
-      if (!over) [ringX, ringY] = [e.clientX, e.clientY]; // (re)entering: start the ring under the pointer
-      travelled += Math.hypot(e.clientX - x, e.clientY - y);
+      if (!over) { // (re)entering: start everything under the pointer
+        [x, y, angle, heading] = [e.clientX, e.clientY, REST, REST];
+        for (const dot of trail) [dot.x, dot.y] = [x, y];
+      }
+      const [dx, dy] = [e.clientX - x, e.clientY - y];
+      [vx, vy] = [vx * 0.6 + dx * 0.4, vy * 0.6 + dy * 0.4];
+      if (Math.hypot(vx, vy) > 1.5) {
+        heading = (Math.atan2(vy, vx) * 180) / Math.PI;
+        lastMove = e.timeStamp;
+      }
+      travelled += Math.hypot(dx, dy);
       [x, y] = [e.clientX, e.clientY];
-      dot.style.translate = `${x}px ${y}px`;
-      ring.style.setProperty('--c', `var(--sdg-${(Math.floor(travelled / 160) % 17) + 1})`);
-      if (!frame) frame = requestAnimationFrame(trail);
+      plane.style.translate = `${x}px ${y}px`; // not transform, so the CSS hover scale and the turn stay around the nose
+      plane.style.setProperty('--c', `var(--sdg-${(Math.floor(travelled / 160) % 17) + 1})`);
+      if (!frame) frame = requestAnimationFrame(fly);
       if (e.target !== over) {
         over = e.target;
         root.classList.toggle('cursor-off', Boolean(over.closest(TEXT)));
@@ -169,18 +200,18 @@
 
     document.addEventListener('pointerdown', (e) => {
       if (e.pointerType !== 'mouse' || root.classList.contains('cursor-off')) return;
-      ring.classList.add('press');
+      plane.classList.add('press');
       for (let i = 0; i < 12; i++) {
-        const angle = (i / 12) * 2 * Math.PI + Math.random() * 0.4;
+        const direction = (i / 12) * 2 * Math.PI + Math.random() * 0.4;
         const distance = 30 + Math.random() * 34;
         const spark = Object.assign(document.createElement('i'), { className: 'cursor-spark' });
         spark.style.cssText = `left: ${e.clientX}px; top: ${e.clientY}px; --c: var(--sdg-${((i * 3) % 17) + 1}); `
-          + `--dx: ${Math.cos(angle) * distance}px; --dy: ${Math.sin(angle) * distance}px`;
+          + `--dx: ${Math.cos(direction) * distance}px; --dy: ${Math.sin(direction) * distance}px`;
         spark.addEventListener('animationend', () => spark.remove());
         document.body.append(spark);
       }
     });
-    document.addEventListener('pointerup', () => ring.classList.remove('press'));
+    document.addEventListener('pointerup', () => plane.classList.remove('press'));
   }
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reducedMotion()) mountCursor();
 
