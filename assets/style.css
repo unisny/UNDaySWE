@@ -375,6 +375,14 @@ details[open] > summary::before { content: "–"; }
 .tools a { text-decoration: none; }
 .tools a:hover b { text-decoration: underline; }
 
+.air { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); margin-bottom: 20px; }
+.air > :not(.air-city) { grid-column: 1 / -1; }
+.air-city { padding: 16px 18px; border-top: 6px solid var(--c); display: grid; gap: 8px; align-content: start; }
+.air-city h3 { margin: 0; font-size: 1.05rem; }
+.air-city .v { font: 800 3rem/1 var(--font-display); letter-spacing: -.02em; }
+.air-city .tags span:first-child { background: var(--c); color: #111; }
+.demo-steps { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
+
 .trouble { display: grid; gap: 10px; }
 .trouble details { padding: 14px 18px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
 .trouble details > :not(summary) { margin: 12px 0 0 32px; }
