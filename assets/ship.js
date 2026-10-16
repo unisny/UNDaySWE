@@ -1,7 +1,7 @@
 // Ship page: the "Air Right Now" demo project runs live with its starter prompt,
 // and the GitHub Pages step builds https://USERNAME.github.io/REPO/ as you type.
 (() => {
-  const { SKELETON, esc, starterPrompt, copyText, flash, whenVisible, store } = window.UND;
+  const { esc, starterPrompt, copyText, flash, whenVisible, store } = window.UND;
 
   // ---------- Demo project: Air Right Now ----------
 
@@ -16,23 +16,35 @@
   // US AQI bands, worst first: [lowest AQI, label, SDG color].
   const LEVELS = [[151, 'Unhealthy', 1], [101, 'Unhealthy for sensitive groups', 11], [51, 'Moderate', 7], [0, 'Good', 3]];
 
+  // A city with no reading yet is a grey placeholder card of the same size.
+  function cityCard({ name, aqi, pm }) {
+    const [, label, sdg] = aqi == null ? [0, '…'] : LEVELS.find(([min]) => aqi >= min);
+    return `<article class="card air-city" style="--c: ${sdg ? `var(--sdg-${sdg})` : 'var(--line-2)'}"><h3>${esc(name)}</h3>`
+      + `<span class="v">${aqi == null ? '–' : Number(aqi)}</span>`
+      + `<span class="tags"><span>${label}</span><span>PM2.5 ${pm == null ? '…' : Number(pm)}</span></span></article>`;
+  }
+
+  // If the cards are above the screen (say, after a jump to #online), keep what's on
+  // screen in place when their height changes.
   const air = document.getElementById('air');
-  air.innerHTML = SKELETON;
+  function showAir(html) {
+    const below = air.nextElementSibling;
+    const before = below.getBoundingClientRect().top;
+    air.innerHTML = html;
+    if (air.getBoundingClientRect().top < 0) window.scrollBy(0, below.getBoundingClientRect().top - before);
+  }
+
+  air.innerHTML = CITIES.map(cityCard).join('');
   whenVisible(air, async () => {
     try {
       const res = await fetch(AIR_URL);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const rows = (await res.json())
         .map((r, i) => ({ name: CITIES[i].name, aqi: r.current.us_aqi, pm: r.current.pm2_5 }))
-        .filter((r) => r.aqi != null)
-        .sort((a, b) => a.aqi - b.aqi);
-      air.innerHTML = rows.map(({ name, aqi, pm }) => {
-        const [, label, sdg] = LEVELS.find(([min]) => aqi >= min);
-        return `<article class="card air-city" style="--c: var(--sdg-${sdg})"><h3>${esc(name)}</h3><span class="v">${Number(aqi)}</span>`
-          + `<span class="tags"><span>${label}</span><span>PM2.5 ${Number(pm)}</span></span></article>`;
-      }).join('');
+        .sort((a, b) => (a.aqi ?? Infinity) - (b.aqi ?? Infinity));
+      showAir(rows.map(cityCard).join(''));
     } catch {
-      air.innerHTML = '<p class="note">Couldn’t load the air data. Try again in a minute.</p>';
+      showAir('<p class="note">Couldn’t load the air data. Try again in a minute.</p>');
     }
   });
 
