@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>5-Minute Setup · UN Day</title>
-  <meta name="description" content="Go from a computer to a working app in under 5 minutes: which free AI coding tools high school students can use, and how to put your app online.">
+  <title>Build It Now · UN Day</title>
+  <meta name="description" content="Go from a computer to a working app in about 10 minutes with GitHub Codespaces and Copilot, plus fixes for common errors and the AI coding tools you’ll hear about.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,44 +31,47 @@
   <main id="main">
     <section class="hero">
       <div class="wrap">
-        <span class="eyebrow">Computer → code in under 5 minutes</span>
-        <h1>Pick a lane.<br>Start <span class="mark">building</span>.</h1>
-        <nav class="lane-tabs" aria-label="Lanes">
-          <a class="lane-tab" href="#lane-1" style="--c: var(--sdg-7)"><b>1</b><span>Build it now</span><small>3 min · no new accounts</small></a>
-          <a class="lane-tab" href="#lane-2" style="--c: var(--sdg-6)"><b>2</b><span>Put it online</span><small>5 min · GitHub, 13+</small></a>
-          <a class="lane-tab" href="#lane-3" style="--c: var(--sdg-15)"><b>3</b><span>Pro setup</span><small>10 min · needs Lane 2</small></a>
-        </nav>
+        <span class="eyebrow">Computer → app in about 10 minutes</span>
+        <h1>Build it <span class="mark">now</span>.</h1>
       </div>
     </section>
 
-    <section class="section lane" id="lane-1" style="--c: var(--sdg-7)">
+    <section class="section" id="build" style="--c: var(--sdg-15)">
       <div class="wrap">
-        <div class="lane-head">
-          <h2>Lane 1 · Build it now</h2>
+        <div class="steps-head">
+          <h2>In GitHub Codespaces</h2>
           <span class="progress" aria-hidden="true"><i></i></span><span class="progress-count"></span>
         </div>
         <ol class="steps">
           <li class="step">
-            <input type="checkbox" data-save="l1-1" aria-label="Done: open Gemini">
+            <input type="checkbox" data-save="cs-1" aria-label="Done: GitHub account">
             <div>
-              <h3>Open Gemini with your school account</h3>
-              <div class="path"><a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com ↗</a></div>
+              <h3>Make a free GitHub account</h3>
+              <div class="path"><a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup ↗</a></div>
             </div>
           </li>
           <li class="step">
-            <input type="checkbox" data-save="l1-2" aria-label="Done: Canvas warm-up">
+            <input type="checkbox" data-save="cs-2" aria-label="Done: blank codespace">
             <div>
-              <h3>Turn on Canvas, paste the warm-up, press Preview</h3>
-              <div class="path"><b>Tools</b><b>Canvas</b></div>
-              <figure class="mock-canvas" aria-label="Gemini Canvas: your chat on the left, your app running on the right">
-                <div class="mc-chat">
-                  <span class="mc-label">Chat</span>
-                  <q id="warmup">Make a yellow website with a header that says "Agentic Workshop".</q>
-                  <button type="button" class="copy" data-copy="#warmup">Copy</button>
-                </div>
+              <h3>Open a blank codespace</h3>
+              <div class="path"><a href="https://github.com/codespaces" target="_blank" rel="noopener">github.com/codespaces ↗</a><b>Blank</b><b>Use this template</b></div>
+            </div>
+          </li>
+          <li class="step">
+            <input type="checkbox" data-save="cs-3" aria-label="Done: Copilot agent">
+            <div>
+              <h3>Open Copilot in Agent mode</h3>
+              <div class="path"><b><kbd>Ctrl</kbd>&nbsp;<kbd>Alt</kbd>&nbsp;<kbd>I</kbd>&nbsp;(Mac:&nbsp;<kbd>Ctrl</kbd>&nbsp;<kbd>Cmd</kbd>&nbsp;<kbd>I</kbd>)</b><b>Sign up for Copilot Free</b><b>Agent</b></div>
+            </div>
+          </li>
+          <li class="step">
+            <input type="checkbox" data-save="cs-4" aria-label="Done: warm-up and preview">
+            <div>
+              <h3>Warm up: paste this, press Keep, then preview it</h3>
+              <figure class="mock-editor" aria-label="Your codespace: the app on the left, Copilot chat on the right">
                 <div class="mc-app">
                   <div class="mc-tabs">
-                    <button type="button" data-view="code" aria-pressed="false">Code</button>
+                    <button type="button" data-view="code" aria-pressed="false">index.html</button>
                     <button type="button" data-view="preview" aria-pressed="true">Preview</button>
                   </div>
                   <div class="mc-preview">Agentic Workshop</div>
@@ -77,136 +80,32 @@
 &lt;/style&gt;
 &lt;h1&gt;Agentic Workshop&lt;/h1&gt;</pre>
                 </div>
+                <div class="mc-chat">
+                  <span class="mc-label">Copilot</span>
+                  <q id="warmup">Make a yellow website with a header that says "Agentic Workshop".</q>
+                  <button type="button" class="copy" data-copy="#warmup">Copy</button>
+                </div>
               </figure>
+              <div class="codeblock"><pre id="serve">python3 -m http.server 8000</pre><button type="button" class="copy" data-copy="#serve">Copy</button></div>
+              <div class="path"><b>Terminal (<kbd>Ctrl</kbd>&nbsp;<kbd>`</kbd>)</b><b>Paste, Enter</b><b>Open in Browser</b></div>
             </div>
           </li>
           <li class="step">
-            <input type="checkbox" data-save="l1-4" aria-label="Done: real prompt">
+            <input type="checkbox" data-save="cs-5" aria-label="Done: real prompt">
             <div>
-              <h3>Paste your real starter prompt</h3>
+              <h3>Paste your real starter prompt. Read each change before you Keep it</h3>
               <div class="path or"><a href="./#sparks">Four questions</a><a href="./#pitch">Pitch builder</a><a href="apis.html">Live data</a></div>
             </div>
           </li>
           <li class="step">
-            <input type="checkbox" data-save="l1-5" aria-label="Done: first change">
+            <input type="checkbox" data-save="cs-6" aria-label="Done: first change">
             <div>
               <h3>Make it yours, one change per message</h3>
               <div class="says"><q>Make the headline huge.</q><q>Add a map.</q><q>Use the SDG 13 green, #3F7E44.</q><q>Use the font Fraunces.</q><a class="copy" href="design.html">More in Design →</a></div>
             </div>
           </li>
         </ol>
-        <p class="note">No Gemini? Use <a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT</a> Canvas (13+, parent’s permission under 18), or pair up with a classmate.</p>
-      </div>
-    </section>
-
-    <section class="section lane" id="lane-2" style="--c: var(--sdg-6)">
-      <div class="wrap">
-        <div class="lane-head">
-          <h2>Lane 2 · Put it online</h2>
-          <span class="progress" aria-hidden="true"><i></i></span><span class="progress-count"></span>
-        </div>
-        <ol class="steps">
-          <li class="step">
-            <input type="checkbox" data-save="l2-1" aria-label="Done: GitHub account">
-            <div>
-              <h3>Make a free GitHub account</h3>
-              <div class="path"><a href="https://github.com/signup" target="_blank" rel="noopener">github.com/signup ↗</a></div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l2-2" aria-label="Done: new repository">
-            <div>
-              <h3>Create a repository</h3>
-              <div class="path"><b>+</b><b>New repository</b><b>Public</b><b>Add a README</b><b>Create repository</b></div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l2-3" aria-label="Done: add index.html">
-            <div>
-              <h3>Paste your app’s code from Canvas</h3>
-              <div class="path"><b>Add file</b><b>Create new file</b><code>index.html</code><b>Commit changes</b></div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l2-4" aria-label="Done: turn on Pages">
-            <div>
-              <h3>Turn on GitHub Pages</h3>
-              <div class="path"><b>Settings</b><b>Pages</b><b>Deploy from a branch</b><b>main · / (root)</b><b>Save</b></div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l2-5" aria-label="Done: open link">
-            <div>
-              <h3>Wait a minute, then open your link</h3>
-              <div class="url-build">
-                https://<input id="gh-user" placeholder="your-username" aria-label="Your GitHub username" spellcheck="false">.github.io/<input id="gh-repo" placeholder="repo-name" aria-label="Your repository name" spellcheck="false">/
-                <a class="copy" id="gh-open" href="#" target="_blank" rel="noopener" hidden>Open ↗</a>
-              </div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l2-6" aria-label="Done: teammates">
-            <div>
-              <h3>Working in a team? Add teammates</h3>
-              <div class="path"><b>Settings</b><b>Collaborators</b><b>Add people</b></div>
-            </div>
-          </li>
-        </ol>
-        <p class="note">Other ways to publish: <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">Netlify Drop</a> (13+, drag and drop) · <a href="https://vercel.com/new" target="_blank" rel="noopener">Vercel</a> (16+)</p>
-      </div>
-    </section>
-
-    <section class="section lane" id="lane-3" style="--c: var(--sdg-15)">
-      <div class="wrap">
-        <div class="lane-head">
-          <h2>Lane 3 · Pro setup</h2>
-          <span class="progress" aria-hidden="true"><i></i></span><span class="progress-count"></span>
-        </div>
-        <ol class="steps">
-          <li class="step">
-            <input type="checkbox" data-save="l3-1" aria-label="Done: open Codespace">
-            <div>
-              <h3>Open a Codespace on your repo</h3>
-              <div class="path"><b>Code</b><b>Codespaces</b><b>Create codespace on main</b></div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l3-2" aria-label="Done: Copilot agent">
-            <div>
-              <h3>Open Copilot in Agent mode</h3>
-              <div class="path"><b><kbd>Ctrl</kbd>&nbsp;<kbd>Alt</kbd>&nbsp;<kbd>I</kbd>&nbsp;(Mac:&nbsp;<kbd>Ctrl</kbd>&nbsp;<kbd>Cmd</kbd>&nbsp;<kbd>I</kbd>)</b><b>Agent</b></div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l3-3" aria-label="Done: build">
-            <div>
-              <h3>Paste your prompt. Read each change before you keep it</h3>
-              <div class="path"><b>Keep</b></div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l3-4" aria-label="Done: preview">
-            <div>
-              <h3>Preview it in the terminal (<kbd>Ctrl</kbd>&nbsp;<kbd>`</kbd>)</h3>
-              <div class="codeblock"><pre id="serve">python3 -m http.server 8000</pre><button type="button" class="copy" data-copy="#serve">Copy</button></div>
-              <div class="path" style="margin-top: 10px"><b>Open in Browser</b></div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l3-5" aria-label="Done: commit">
-            <div>
-              <h3>Commit and publish</h3>
-              <div class="path"><b>Source Control</b><b>Commit</b><b>Sync</b></div>
-            </div>
-          </li>
-          <li class="step">
-            <input type="checkbox" data-save="l3-6" aria-label="Done: apply for Education">
-            <div>
-              <h3>After today: free Copilot Student (13+)</h3>
-              <div class="path"><a href="https://education.github.com/pack" target="_blank" rel="noopener">education.github.com/pack ↗</a></div>
-            </div>
-          </li>
-        </ol>
+        <p class="note">No GitHub account yet? Build in <a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini</a> with your school account (Tools › Canvas), or pair up with a classmate.</p>
       </div>
     </section>
 
@@ -236,7 +135,7 @@
           </details>
           <details>
             <summary>Every fix makes it worse</summary>
-            <p>Go back to the last version that worked (Canvas and GitHub both keep history), then ask for one small change.</p>
+            <p>Undo Copilot’s last change, or go back to your last commit, then ask for one small change.</p>
           </details>
           <details>
             <summary><code class="err">404 · There isn’t a GitHub Pages site here.</code></summary>
@@ -251,13 +150,13 @@
       <div class="wrap">
         <h2 class="section-head">AI coding tools.</h2>
         <ul class="tools">
+          <li><b>Codespaces + Copilot</b>Code in the browser</li>
+          <li><b>GitHub Pages</b>Free website hosting</li>
+          <li><b>Vercel</b>Hosting for bigger apps</li>
+          <li><b>GitHub Education</b>Free Copilot for students</li>
           <li><b>Gemini Canvas</b>Build and preview apps</li>
           <li><b>ChatGPT</b>Backup AI builder</li>
-          <li><b>GitHub Pages</b>Free website hosting</li>
-          <li><b>Codespaces + Copilot</b>Code in the browser</li>
-          <li><b>GitHub Education</b>Free Copilot for students</li>
           <li><b>Netlify</b>Drag-and-drop hosting</li>
-          <li><b>Vercel</b>Hosting for bigger apps</li>
           <li><b>Claude Code</b>The instructor’s AI agent</li>
           <li><b>Cursor</b>AI code editor</li>
           <li><b>AI Studio</b>Google’s AI app builder</li>

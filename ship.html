@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ship It · UN Day</title>
-  <meta name="description" content="Share your app, demo it in 30 seconds, and keep building after UN Day: hackathons, AI programs and youth-led AI policy.">
+  <meta name="description" content="Publish your codespace, put your app online with Vercel or GitHub Pages, demo it in 30 seconds, and keep building after UN Day: hackathons, AI programs and youth-led AI policy.">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,18 +43,68 @@
         </div>
         <div class="grid grid-3">
           <article class="card ship" style="--c: var(--sdg-7)">
-            <h3>Share it now</h3>
-            <div class="path"><b>Share</b></div>
+            <h3>Share it on Vercel</h3>
+            <div class="path"><a href="https://vercel.com/new" target="_blank" rel="noopener">Vercel ↗</a><b>Import</b><b>Deploy</b></div>
           </article>
           <article class="card ship" style="--c: var(--sdg-6)">
             <h3>Put it online for good</h3>
-            <div class="path"><a href="start.html#lane-2">GitHub Pages steps</a></div>
+            <div class="path"><a href="#online">GitHub Pages steps ↓</a></div>
           </article>
           <article class="card ship" style="--c: var(--sdg-5)">
             <h3>Demo it in 30 seconds</h3>
             <div class="says"><q>Read your pitch.</q><q>Click every button.</q></div>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="online" style="--c: var(--sdg-6)">
+      <div class="wrap">
+        <div class="steps-head">
+          <h2>GitHub Pages</h2>
+          <span class="progress" aria-hidden="true"><i></i></span><span class="progress-count"></span>
+        </div>
+        <ol class="steps">
+          <li class="step">
+            <input type="checkbox" data-save="pub-1" aria-label="Done: publish the codespace">
+            <div>
+              <h3>Publish your codespace to GitHub</h3>
+              <div class="path"><b>Source Control</b><b>Publish to GitHub</b><b>Publish to GitHub public repository</b></div>
+            </div>
+          </li>
+          <li class="step">
+            <input type="checkbox" data-save="pub-2" aria-label="Done: turn on Pages">
+            <div>
+              <h3>Turn on GitHub Pages in your new repo</h3>
+              <div class="path"><b>Settings</b><b>Pages</b><b>Deploy from a branch</b><b>main · / (root)</b><b>Save</b></div>
+            </div>
+          </li>
+          <li class="step">
+            <input type="checkbox" data-save="pub-3" aria-label="Done: open link">
+            <div>
+              <h3>Wait a minute, then open your link</h3>
+              <div class="url-build">
+                https://<input id="gh-user" placeholder="your-username" aria-label="Your GitHub username" spellcheck="false">.github.io/<input id="gh-repo" placeholder="repo-name" aria-label="Your repository name" spellcheck="false">/
+                <a class="copy" id="gh-open" href="#" target="_blank" rel="noopener" hidden>Open ↗</a>
+              </div>
+            </div>
+          </li>
+          <li class="step">
+            <input type="checkbox" data-save="pub-4" aria-label="Done: push a change">
+            <div>
+              <h3>Changed something? Send it to your site</h3>
+              <div class="path"><b>Source Control</b><b>Commit</b><b>Sync</b></div>
+            </div>
+          </li>
+          <li class="step">
+            <input type="checkbox" data-save="pub-5" aria-label="Done: teammates">
+            <div>
+              <h3>Working in a team? Add teammates</h3>
+              <div class="path"><b>Settings</b><b>Collaborators</b><b>Add people</b></div>
+            </div>
+          </li>
+        </ol>
+        <p class="note">Another way to publish: <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">Netlify Drop</a> (13+, drag and drop)</p>
       </div>
     </section>
 
@@ -84,6 +134,7 @@
         </div>
         <div class="tool-links">
           <a href="design.html#group-art">Make music, art and visuals with code <span>Strudel, p5.js, CodePen →</span></a>
+          <a href="https://education.github.com/pack" target="_blank" rel="noopener">Free Copilot Student <span>GitHub Education, 13+ ↗</span></a>
         </div>
       </div>
     </section>
@@ -107,5 +158,6 @@
   </footer>
 
   <script src="assets/site.js"></script>
+  <script src="assets/ship.js"></script>
 </body>
 </html>

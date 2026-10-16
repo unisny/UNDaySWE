@@ -1,6 +1,6 @@
-// Shared helpers for every page: SDG chips, copy buttons, saved checklists,
-// and the starter-prompt template. Exposed on window.UND for the other scripts.
-// Also turns on the custom cursor for mouse users.
+// Shared helpers for every page: SDG chips, copy buttons, saved checklists and
+// their progress bars, and the starter-prompt template. Exposed on window.UND
+// for the other scripts. Also turns on the custom cursor for mouse users.
 (() => {
   const SDG_NAMES = [
     null,
@@ -96,6 +96,21 @@
   for (const box of document.querySelectorAll('input[type="checkbox"][data-save]')) {
     box.checked = store.get(`check:${box.dataset.save}`) === '1';
     box.addEventListener('change', () => store.set(`check:${box.dataset.save}`, box.checked ? '1' : '0'));
+  }
+
+  // A checklist's progress bar counts the ticked boxes in its section.
+  for (const bar of document.querySelectorAll('.progress')) {
+    const section = bar.closest('section');
+    const boxes = [...section.querySelectorAll('input[type="checkbox"]')];
+    const fill = bar.querySelector('i');
+    const count = section.querySelector('.progress-count');
+    const update = () => {
+      const done = boxes.filter((box) => box.checked).length;
+      fill.style.setProperty('--p', `${(done / boxes.length) * 100}%`);
+      count.textContent = `${done} of ${boxes.length} done`;
+    };
+    section.addEventListener('change', update);
+    update();
   }
 
   for (const bar of document.querySelectorAll('.sdg-bar')) {
